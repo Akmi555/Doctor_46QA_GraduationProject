@@ -1,6 +1,6 @@
-package com.phonebook.utils;
+package com.doctor.utils;
 
-import com.phonebook.model.Contact;
+import com.doctor.pages.Contact;
 import org.testng.annotations.DataProvider;
 
 import java.io.BufferedReader;

@@ -3,7 +3,7 @@
 <suite name="LoginAll" verbose="1">
     <test name="LoginAll">
         <classes>
-            <class name="com.phonebook.LoginTests"/>
+            <class name="com.doctor.LoginTests"/>
         </classes>
     </test>
 </suite>

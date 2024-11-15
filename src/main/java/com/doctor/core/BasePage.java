@@ -1,4 +1,4 @@
-package com.phonebook.core;
+package com.doctor.core;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;

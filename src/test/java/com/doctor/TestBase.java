@@ -1,6 +1,6 @@
-package com.phonebook;
+package com.doctor;
 
-import com.phonebook.core.ApplicationManager;
+import com.doctor.core.ApplicationManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import org.slf4j.Logger;

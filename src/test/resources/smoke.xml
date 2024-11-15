@@ -3,12 +3,12 @@
 <suite name="SmokyTest" verbose="1">
     <test name="Negative">
         <classes>
-            <class name="com.phonebook.CreateAccountTests">
+            <class name="com.doctor.CreateAccountTests">
                 <methods>
                     <include name=".*Negative.*"/>
                 </methods>
             </class>
-            <class name="com.phonebook.LoginTests">
+            <class name="com.doctor.LoginTests">
                 <methods>
                     <include name=".*Positive.*"/>
                 </methods>

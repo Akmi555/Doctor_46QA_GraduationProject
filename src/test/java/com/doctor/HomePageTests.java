@@ -1,6 +1,6 @@
-package com.phonebook;
+package com.doctor;
 
-import com.phonebook.pages.HomePage;
+import com.doctor.pages.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

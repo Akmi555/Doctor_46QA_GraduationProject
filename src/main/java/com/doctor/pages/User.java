@@ -1,4 +1,4 @@
-package com.phonebook.pages;
+package com.doctor.pages;
 
 public class User {
     private String email;

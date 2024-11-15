@@ -1,7 +1,7 @@
-package com.phonebook.fw;
+package com.doctor.fw;
 
-import com.phonebook.core.BasePage;
-import com.phonebook.pages.User;
+import com.doctor.core.BasePage;
+import com.doctor.pages.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;

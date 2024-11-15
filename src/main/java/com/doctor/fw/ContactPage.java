@@ -1,7 +1,7 @@
-package com.phonebook.fw;
+package com.doctor.fw;
 
-import com.phonebook.core.BasePage;
-import com.phonebook.pages.Contact;
+import com.doctor.core.BasePage;
+import com.doctor.pages.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;

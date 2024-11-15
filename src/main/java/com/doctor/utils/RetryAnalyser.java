@@ -1,4 +1,4 @@
-package com.phonebook.utils;
+package com.doctor.utils;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;

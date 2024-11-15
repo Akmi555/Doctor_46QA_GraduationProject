@@ -1,5 +1,5 @@
-package com.phonebook.core;
-import com.phonebook.pages.HomePage;
+package com.doctor.core;
+import com.doctor.pages.HomePage;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

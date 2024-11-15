@@ -3,11 +3,11 @@
 <suite name="RegressionTest" verbose="1">
     <test name="PositiveTests">
         <classes>
-            <class name="com.phonebook.HomePageTests"/>
-            <class name="com.phonebook.AddContactsTests"/>
-            <class name="com.phonebook.DeleteContactTests"/>
-<!--        <class name="com.phonebook.CreateAccountTests"/>-->
-            <class name="com.phonebook.LoginTests">
+            <class name="com.doctor.HomePageTests"/>
+            <class name="com.doctor.AddContactsTests"/>
+            <class name="com.doctor.DeleteContactTests"/>
+<!--        <class name="com.doctoreateAccountTests"/>-->
+            <class name="com.doctor.LoginTests">
                 <methods>
                     <include name=".*Positive.*"/>
                 </methods>
