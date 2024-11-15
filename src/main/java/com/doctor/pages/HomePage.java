@@ -13,7 +13,7 @@ public class HomePage extends BasePage {
         super(driver, wait);
         PageFactory.initElements(driver, this);
     }
-    @FindBy(xpath = "//a[сontains(text(),'no')]")
+    @FindBy(xpath = "//a[contains(text(),'Team')]")
     WebElement teamButton;
 
 

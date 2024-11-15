@@ -20,6 +20,13 @@ dependencies {
     implementation group: 'org.testng', name: 'testng', version: '7.10.2'
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.9'
     testImplementation 'io.qameta.allure:allure-testng:2.22.0'
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.0'//для api тестов
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.0'
+    //compileOnly 'org.projectlombok:lombok:1.18.34'
+    //annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    //testCompileOnly 'org.projectlombok:lombok:1.18.34'
+    //testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+
 }
 
 test {
@@ -27,7 +34,7 @@ test {
         listeners << 'io.qameta.allure.testng.AllureTestNg'
     }
 }
-
+//сли указать таску smoke или regression. Сами Task мы прописываем в xml файлах
 def registerTask(String taskName, String suitePath){
     tasks.register(taskName, Test){
         useTestNG(){
