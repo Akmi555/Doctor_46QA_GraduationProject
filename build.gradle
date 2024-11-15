@@ -9,7 +9,12 @@ version = '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+// Шаг для Windows, так как русские шаги в Cucumber могут быть не найдены
+compileJava.options.encoding = 'UTF-8'
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 dependencies {
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.25.0'
     implementation group: 'org.testng', name: 'testng', version: '7.10.2'

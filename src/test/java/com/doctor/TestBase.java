@@ -52,7 +52,7 @@ public class TestBase {
             logger.info("Test is PASSED: [" + method.getName() + "], with data: [" + parameters + "]");
         } else {
             try {
-               app.isAlertPresent();
+                app.getHomePage().isAlertPresent();
             } catch (Exception ignore) {
             }
 
@@ -60,7 +60,7 @@ public class TestBase {
             logger.error("Test is FAILED: [" + method.getName() + "], with data: [" + parameters + "]");
 
             // Делаем и прикрепляем скриншот
-            String screenshotPath = app.takeScreenshot();
+            String screenshotPath = app.getHomePage().takeScreenshot();
             attachScreenshot(screenshotPath);
             logger.error("Screenshot: [" + screenshotPath + "]");
         }

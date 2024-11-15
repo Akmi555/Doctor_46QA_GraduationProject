@@ -77,4 +77,8 @@ public class BasePage {
         return screenshot.getAbsolutePath();
     }
 
+
+
+
+
 }
