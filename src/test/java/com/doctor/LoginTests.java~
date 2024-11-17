@@ -18,7 +18,7 @@ public class LoginTests extends TestBase {
     public void loginPositiveTest() {
         new LoginPage(app.driver, app.wait)
                 .enterPersonalData("exampleEmail@gmail.com", "Qwery123456")
-                //.isAnmeldenButtonIsPresent()
+                .isAnmeldenButtonIsPresent()
                 .clickAnmeldenButton();
 //                .verifyUserIsLoggedIn(new com.doctor.pages.UserData()
 //                        .setEmail("Y0vMv@example.com")

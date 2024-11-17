@@ -21,6 +21,10 @@ public class LoginPage extends BasePage {
         isElementPresent(anmeldenButton);
         return isElementPresent(anmeldenButton);
     }
+    public HomePage clickAnmeldenButton() {
+        click(anmeldenButton);
+        return new HomePage(driver, wait);
+    }
 
     @FindBy(xpath = "//input[@type='email']")
     WebElement emailInput;
@@ -34,8 +38,4 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public HomePage clickLoginButton() {
-        click(anmeldenButton);
-        return new HomePage(driver, wait);
-    }
 }
