@@ -1,5 +1,6 @@
 package com.doctor;
 
+import com.doctor.core.TestBase;
 import com.doctor.pages.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;

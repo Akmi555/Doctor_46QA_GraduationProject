@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
@@ -13,14 +14,22 @@ public class HomePage extends BasePage {
         super(driver, wait);
         PageFactory.initElements(driver, this);
     }
+
     @FindBy(xpath = "//a[contains(text(),'Team')]")
     WebElement teamButton;
 
 
     public boolean isHomeComponentPresent() {
         System.out.println("Look for 'HomeComponent' on the home page");
-
         return teamButton.isDisplayed();
+    }
+
+    @FindBy(xpath = "//a[contains(text(),'Login')]")
+    WebElement loginLink;
+
+    public LoginPage getLoginPage() {
+        click(loginLink);
+        return new LoginPage(driver, wait);
     }
 //    public boolean isTeamButtonPresent() {
 //        return teamButton.isDisplayed();

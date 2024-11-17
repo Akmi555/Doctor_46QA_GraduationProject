@@ -1,6 +1,7 @@
 package com.doctor.core;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -12,30 +13,38 @@ import java.nio.file.Files;
 
 public class BasePage {
     Logger logger = LoggerFactory.getLogger(BasePage.class);
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    public WebDriver driver;
+    public WebDriverWait wait;
 
     public BasePage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
         this.wait = wait;
+        PageFactory.initElements(driver, this);
     }
 
-    public boolean isElementPresent(By locator) {
-        // logger.info("Проверка есть ли элемент [" + locator + "] на странице");
-        return driver.findElements(locator).size() > 0;
-    }
 
-    protected void click(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-        driver.findElement(locator).click();
+        public boolean isElementPresent(WebElement element) {
+            try {
+                return element.isDisplayed();
+            } catch (NoSuchElementException e) {
+                return false;
+            } catch (StaleElementReferenceException e) {
+                return false;
+            }
+        }
+
+
+    protected void click(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
         //logger.info("[" + locator + "] is pressed");
     }
 
-    protected void type(By locator, String text) {
+    protected void type(WebElement element, String text) {
         if (text != null) {
-            click(locator);
-            driver.findElement(locator).clear();
-            driver.findElement(locator).sendKeys(text);
+            click(element);
+            element.clear();
+            element.sendKeys(text);
         }
     }
 

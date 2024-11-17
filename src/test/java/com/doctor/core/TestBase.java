@@ -1,8 +1,9 @@
-package com.doctor;
+package com.doctor.core;
 
-import com.doctor.core.ApplicationManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
@@ -19,6 +20,9 @@ import java.nio.file.Paths;
 public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
     protected static ApplicationManager app = new ApplicationManager(System.getProperty("browser", "chrome"));
+    public WebDriver driver;
+    public WebDriverWait wait;
+
 
     @BeforeSuite
     public void setUp() {
