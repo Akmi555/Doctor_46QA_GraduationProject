@@ -22,6 +22,11 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-testng:2.22.0'
     implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.0'//для api тестов
     implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.0'
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.18.1'
+    implementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.18.1'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.9.2'
+    // implementation 'org.slf4j:slf4j-nop:2.0.7'
+
     //compileOnly 'org.projectlombok:lombok:1.18.34'
     //annotationProcessor 'org.projectlombok:lombok:1.18.34'
     //testCompileOnly 'org.projectlombok:lombok:1.18.34'

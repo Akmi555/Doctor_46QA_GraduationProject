@@ -8,7 +8,7 @@
                     <include name=".*Negative.*"/>
                 </methods>
             </class>
-            <class name="com.doctor.LoginTests">
+            <class name="com.doctor.tests_selenium.LoginTests">
                 <methods>
                     <include name=".*Positive.*"/>
                 </methods>

@@ -3,11 +3,11 @@
 <suite name="RegressionTest" verbose="1">
     <test name="PositiveTests">
         <classes>
-            <class name="com.doctor.HomePageTests"/>
+            <class name="com.doctor.tests_selenium.HomePageTests"/>
             <class name="com.doctor.AddContactsTests"/>
             <class name="com.doctor.DeleteContactTests"/>
 <!--        <class name="com.doctoreateAccountTests"/>-->
-            <class name="com.doctor.LoginTests">
+            <class name="com.doctor.tests_selenium.LoginTests">
                 <methods>
                     <include name=".*Positive.*"/>
                 </methods>

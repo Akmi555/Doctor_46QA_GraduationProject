@@ -16,6 +16,10 @@ public class ApplicationManager {
     public WebDriver driver;
     public WebDriverWait wait;
 
+    public WebDriver getDriver() {
+        return driver;
+    }
+
     //    private UserPage userPage;
     private HomePage homePage;
 //    private ContactPage contactPage;
@@ -27,7 +31,6 @@ public class ApplicationManager {
     }
 
     public void init() {
-
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("window-size=1920x1080");
@@ -40,8 +43,6 @@ public class ApplicationManager {
         } else if (browser.equalsIgnoreCase("safari")) {
             driver = new SafariDriver();
         }
-
-
 
         driver.get("https://gesundheitspraxis-wertvoll.de");
         driver.manage().window().maximize();

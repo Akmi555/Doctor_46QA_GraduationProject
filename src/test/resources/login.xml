@@ -3,7 +3,7 @@
 <suite name="LoginAll" verbose="1">
     <test name="LoginAll">
         <classes>
-            <class name="com.doctor.LoginTests"/>
+            <class name="com.doctor.tests_selenium.LoginTests"/>
         </classes>
     </test>
 </suite>

@@ -31,7 +31,80 @@ public class HomePage extends BasePage {
         click(loginLink);
         return new LoginPage(driver, wait);
     }
+
 //    public boolean isTeamButtonPresent() {
 //        return teamButton.isDisplayed();
 //    }
+    public void openHomePage() {
+        driver.get("https://gesundheitspraxis-wertvoll.de");
+    }
+
+    @FindBy(xpath = " //h1[contains(text(),'Gesundheitspraxis Wertvoll')]")
+    WebElement homePageTitle;
+
+    public boolean isHomePageTitlePresent() {
+        return isElementPresent(homePageTitle);
+    }
+
+    public LoginPage clickOnLoginLink() {
+        click(loginLink);
+        return new LoginPage(driver, wait);
+    }
+
+    // @FindBy(xpath = "(//a[@class='portfolio-link']//div)[1]")
+
+    @FindBy(xpath = "//div[text()='Infusionstherapie']/preceding::a[1]")
+    WebElement infusionstherapieLink;
+
+    public HomePage clickInfusionstherapieLink() {
+        click(infusionstherapieLink);
+        return new HomePage(driver, wait);
+    }
+
+    @FindBy(xpath = "//h2[contains(text(),'Infusionstherapie')]")
+    WebElement infusionstherapieTitle;
+
+    public boolean isInfusionstherapieTitlePresent() {
+        wait.until(ExpectedConditions.visibilityOf(infusionstherapieTitle));
+        return infusionstherapieTitle.isDisplayed();
+        // return isElementPresent(infusionstherapieTitle);
+    }
+
+    @FindBy(xpath = "//a[contains(text(),'Portfolio')]")
+    WebElement portfolioLink;
+
+    public HomePage clikPortfolio() {
+        click(portfolioLink);
+        return new HomePage(driver, wait);
+    }
+
+    @FindBy(xpath = "//h2[contains(text(),'Meine Leistungen')]")
+    WebElement meineLeistungenTitle;
+
+    public boolean isMeineLeistungenTitle() {
+        return isElementPresent(meineLeistungenTitle);
+    }
+
+    @FindBy(xpath = "//div[text()='Neuraltherapie']/preceding::a[1]")
+    WebElement neuraltherapieLink;
+
+    public void clickNeuraltherapie() {
+        click(neuraltherapieLink);
+    }
+
+    @FindBy(xpath = "//h2[contains(text(),'Neuraltherapie')]")
+    WebElement neuraltherapieTitle;
+
+    public boolean isNeuraltherapieTitlePresent() {
+        wait.until(ExpectedConditions.visibilityOf(neuraltherapieTitle));
+        return neuraltherapieTitle.isDisplayed();
+    }
+
+    @FindBy(xpath = "(//div[@class='portfolio-hover'])[3]")
+    WebElement schropftherapieLink;
+
+    public HomePage clickSchropftherapie() {
+        click(schropftherapieLink);
+        return new HomePage(driver, wait);
+    }
 }

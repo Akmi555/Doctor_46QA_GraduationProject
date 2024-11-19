@@ -1,4 +1,4 @@
-package com.doctor;
+package com.doctor.tests_selenium;
 
 import com.doctor.core.TestBase;
 import com.doctor.pages.HomePage;

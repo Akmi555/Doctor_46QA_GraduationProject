@@ -20,9 +20,6 @@ import java.nio.file.Paths;
 public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
     protected static ApplicationManager app = new ApplicationManager(System.getProperty("browser", "chrome"));
-    public WebDriver driver;
-    public WebDriverWait wait;
-
 
     @BeforeSuite
     public void setUp() {

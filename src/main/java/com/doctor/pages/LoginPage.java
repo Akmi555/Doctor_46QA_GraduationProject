@@ -17,10 +17,11 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Anmelden')]")
     WebElement anmeldenButton;
 
-    public boolean isAnmeldenButtonIsPresent() {
+    public LoginPage isAnmeldenButtonIsPresent() {
         isElementPresent(anmeldenButton);
-        return isElementPresent(anmeldenButton);
+        return this;
     }
+
     public HomePage clickAnmeldenButton() {
         click(anmeldenButton);
         return new HomePage(driver, wait);
@@ -38,4 +39,42 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    @FindBy(xpath = "//h1[contains(text(),'Willkommen zurück')]")
+    WebElement loginPageTitle;
+
+    public boolean isLoginPageTitlePresent() {
+        return isElementPresent(loginPageTitle);
+    }
+
+
+    public LoginPage enterPazientData(String email, String password) {
+        type(emailInput, email);
+        type(passwordInput, password);
+        return this;
+    }
+
+
+    @FindBy(xpath = "//button[contains(@class,'btn btn-primary')]")
+    WebElement anmeldenLink;
+
+    public LoginPage clickOnAnmeldenLink() {
+        click(anmeldenLink);
+        return new LoginPage(driver, wait);
+    }
+
+    @FindBy(xpath = "//a[contains(text(),'Konto erstellen')]")
+    WebElement kontoErstellen;
+
+    public LoginPage clickKontoErstellen() {
+        click(kontoErstellen);
+        return new LoginPage(driver, wait);
+    }
+
+    @FindBy(xpath = "//input[@id='isPersistent']")
+    WebElement angemeldet;
+
+    public LoginPage clickAngemeldet() {
+        click(angemeldet);
+        return this;
+    }
 }

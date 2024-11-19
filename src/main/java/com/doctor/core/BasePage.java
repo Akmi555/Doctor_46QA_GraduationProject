@@ -1,6 +1,9 @@
 package com.doctor.core;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,11 +13,12 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.Duration;
 
 public class BasePage {
     Logger logger = LoggerFactory.getLogger(BasePage.class);
-    public WebDriver driver;
-    public WebDriverWait wait;
+    public static WebDriver driver;
+    public static WebDriverWait wait;
 
     public BasePage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
@@ -23,21 +27,29 @@ public class BasePage {
     }
 
 
-        public boolean isElementPresent(WebElement element) {
-            try {
-                return element.isDisplayed();
-            } catch (NoSuchElementException e) {
-                return false;
-            } catch (StaleElementReferenceException e) {
-                return false;
-            }
+    public boolean isElementPresent(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        } catch (StaleElementReferenceException e) {
+            return false;
         }
-
+    }
+    public void launchBrowser(){
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+        //options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2)); // неявное
+    }
 
     protected void click(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        element.click();
-        //logger.info("[" + locator + "] is pressed");
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+       // element.click();
+        logger.info("[" + element + "] is pressed");
     }
 
     protected void type(WebElement element, String text) {
@@ -86,8 +98,15 @@ public class BasePage {
         return screenshot.getAbsolutePath();
     }
 
-
-
+    public boolean isUserLoggedIn() {
+        try {
+            // Проверяем наличие кнопки выхода или другого элемента, указывающего, что пользователь вошел в систему
+            WebElement logoutButton = driver.findElement(By.xpath("//button[contains(text(),'Logout')]"));
+            return isElementPresent(logoutButton);
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 
 
 }
