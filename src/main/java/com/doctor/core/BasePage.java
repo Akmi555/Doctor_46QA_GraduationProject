@@ -85,6 +85,15 @@ public class BasePage {
         // Возвращаем путь к сохраненному скриншоту
         return screenshot.getAbsolutePath();
     }
+    public boolean isUserLoggedIn() {
+        try {
+            // Проверяем наличие кнопки выхода или другого элемента, указывающего, что пользователь вошел в систему
+            WebElement logoutButton = driver.findElement(By.xpath("//button[contains(text(),'Logout')]"));
+            return isElementPresent(logoutButton);
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 
 
 

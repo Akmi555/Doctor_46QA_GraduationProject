@@ -17,9 +17,9 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Anmelden')]")
     WebElement anmeldenButton;
 
-    public boolean isAnmeldenButtonIsPresent() {
+    public LoginPage isAnmeldenButtonIsPresent() {
         isElementPresent(anmeldenButton);
-        return isElementPresent(anmeldenButton);
+        return this;
     }
     public HomePage clickAnmeldenButton() {
         click(anmeldenButton);
