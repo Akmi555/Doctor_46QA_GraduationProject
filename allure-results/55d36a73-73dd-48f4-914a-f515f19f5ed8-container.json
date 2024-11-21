@@ -1,1 +1,0 @@
-{"uuid":"55d36a73-73dd-48f4-914a-f515f19f5ed8","name":"com.doctor.TestBase.stopTest","children":["30cb5ee7-8493-4132-a3bd-bd188402b71a"],"description":"","befores":[],"afters":[{"name":"stopTest","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1731669734474,"stop":1731669740217}],"start":1731669734474,"stop":1731669740217}
