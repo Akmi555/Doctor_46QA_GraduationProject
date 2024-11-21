@@ -20,3 +20,5 @@ out/
 *.jpeg
 *.jpg
 *.png
+/target/
+/allure-results/

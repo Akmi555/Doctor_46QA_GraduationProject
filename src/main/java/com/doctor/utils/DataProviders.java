@@ -1,6 +1,6 @@
 package com.doctor.utils;
 
-import com.doctor.pages.Contact;
+import com.doctor.model.User;
 import org.testng.annotations.DataProvider;
 
 import java.io.BufferedReader;
@@ -21,36 +21,41 @@ public class DataProviders {
         list.add(new Object[]{"Name4", "LastName4", "1234567894", "email4@gmail.com", "Germany 4", "Description 4"});
         return list.iterator();
     }
-
-    //! Передаёт в тест объекты класса Contact
+//
+//    //! Передаёт в тест объекты класса Contact
+//    @DataProvider
+//    public Iterator<Object[]> addContactObject() {
+//        List<Object[]> list = new ArrayList<>();
+//        list.add(new Object[]{new Contact().setName("Name5").setLastName("LastName5").setPhone("1234567895").setEmail("email5@gmail.com").setAddress("Germany 5").setDescription("Description 5")});
+//        list.add(new Object[]{new Contact().setName("Name6").setLastName("LastName6").setPhone("1234567896").setEmail("email6@gmail.com").setAddress("Germany 6")});
+//        list.add(new Object[]{new Contact().setName("Name7").setLastName("LastName7").setPhone("1234567897").setEmail("email7@gmail.com").setAddress("Germany 7")});
+//        list.add(new Object[]{new Contact().setName("Name8").setLastName("LastName8").setPhone("1234567898").setEmail("email8@gmail.com").setAddress("Germany 8")});
+//        return list.iterator();
+//    }
+//! DataProvider для регистрации пользователя
+@DataProvider
+public Iterator<Object[]> userRegistrationData() {
+    List<Object[]> list = new ArrayList<>();
+    list.add(new Object[]{"John", "Doe", System.currentTimeMillis() + "@t.test", "1234567890",  "Password123"}); // Valid data
+    list.add(new Object[]{"Alice", "Smith", "alice.smith@t.test", "1234567890", "SecurePass1"}); // Valid with phone
+    list.add(new Object[]{"Bob", "Brown", "bob.brown@t.test", "123456789", "Password123"}); // Invalid email
+    list.add(new Object[]{"Chris", "White", "chris.white@t.test", "1256788899", "short"}); // Invalid password
+    return list.iterator();
+}
     @DataProvider
-    public Iterator<Object[]> addContactObject() {
+    public Iterator<Object[]> userRegistrationFromCSV() throws IOException {
         List<Object[]> list = new ArrayList<>();
-        list.add(new Object[]{new Contact().setName("Name5").setLastName("LastName5").setPhone("1234567895").setEmail("email5@gmail.com").setAddress("Germany 5").setDescription("Description 5")});
-        list.add(new Object[]{new Contact().setName("Name6").setLastName("LastName6").setPhone("1234567896").setEmail("email6@gmail.com").setAddress("Germany 6")});
-        list.add(new Object[]{new Contact().setName("Name7").setLastName("LastName7").setPhone("1234567897").setEmail("email7@gmail.com").setAddress("Germany 7")});
-        list.add(new Object[]{new Contact().setName("Name8").setLastName("LastName8").setPhone("1234567898").setEmail("email8@gmail.com").setAddress("Germany 8")});
-        return list.iterator();
-    }
-
-    @DataProvider
-    public Iterator<Object[]> addContactFromCSV() throws IOException {
-        // Создаём массив со списком данных для тестов
-        List<Object[]> list = new ArrayList<>();
-        // Открываем файл .csv для чтения с него данных по адресу src/test/resources/data_csv/contacts.csv
-        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/data_csv/contacts.csv"));
-        // Читаем первую строку
+        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/data_csv/registration.csv"));
         String line = reader.readLine();
-        // Обрабатываем каждую строку дол конца строки
         while (line != null) {
             String[] split = line.split(",");
-            list.add(new Object[]{new Contact()
+            list.add(new Object[]{new User()
                     .setName(split[0])
                     .setLastName(split[1])
-                    .setPhone(split[2])
-                    .setEmail(split[3])
-                    .setAddress(split[4])
-                    .setDescription(split[5])
+                    .setEmail(split[2])
+                    .setPhone(split[3])
+                    .setPassword(split[4])
+
             });
             line = reader.readLine();
         }
@@ -66,7 +71,7 @@ public class DataProviders {
         String line = reader.readLine();
         while (line != null) {
             String[] split = line.split(",");
-            list.add(new Object[]{new Contact()
+            list.add(new Object[]{new User()
                     .setName(split[0])
                     .setLastName(split[1])
             });

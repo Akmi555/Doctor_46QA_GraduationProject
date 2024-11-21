@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeMethod;
 
 public class RegistrationPage extends BasePage {
 
@@ -14,7 +15,17 @@ public class RegistrationPage extends BasePage {
         super(driver, wait);
         PageFactory.initElements(driver, this);
     }
+    @BeforeMethod
+    public static RegistrationPage navigateToRegistrationPage(WebDriver driver, WebDriverWait wait) {
+        // Инициализируем HomePage
+        HomePage homePage = new HomePage(driver, wait);
 
+        // Получаем LoginPage через HomePage
+        LoginPage loginPage = homePage.getLoginPage();
+
+        // Переход на RegistrationPage через LoginPage
+        return loginPage.navigateToRegistrationPage();
+    }
     @FindBy(xpath = "//a[contains(text(),'Konto erstellen')]")
     WebElement kontoErstellen;
 
@@ -59,4 +70,41 @@ public class RegistrationPage extends BasePage {
         click(weiterButton);
         return new RegistrationPage(driver,wait);
     }
+    @FindBy(xpath = "//button[contains(text(),'Account')]")
+    WebElement accountButton;
+
+    /**
+     * Проверяет успешное перенаправление на HomePage
+     * @return true, если кнопка "Account" отображается
+     */
+    public boolean redirectOnHomePage() {
+        return isElementPresent(accountButton);
+    }
+    @FindBy(xpath = "//footer[@class='footer py-4']/following-sibling::div[1]")
+    public WebElement toastifyMessage;
+    public WebElement getToastieMessage() {
+        return toastifyMessage;
+    }
+    // Проверка наличия элемента Toastify
+    public boolean isToastifyMessageDisplayed() {
+        return isElementPresent(toastifyMessage);
+    }
+
+    public boolean isRegistrationSuccessful() {
+        // Проверяем, что сообщение Toastify отсутствует
+        if (isElementPresent(toastifyMessage)) {
+            return false;
+        }
+
+        // Проверяем, что пользователь находится на HomePage
+        return redirectOnHomePage();
+    }
+    public void newRandomUser(String email) {
+
+    }
+    /**
+     * Проверяет успешность регистрации
+     * @return true, если регистрация прошла успешно; false, если возникла ошибка
+     */
+
 }

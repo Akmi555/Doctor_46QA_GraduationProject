@@ -19,7 +19,7 @@ public class LoginTests extends TestBase {
     @Test
     public void loginPositiveTest() {
         new LoginPage(app.driver, app.wait)
-                .enterPersonalData("exampleEmail@gmail.com", "Qwery123456")
+                .enterPersonalData("alice.smith@t.test", "SecurePass1")
                 .isAnmeldenButtonIsPresent()
                 .clickAnmeldenButton();
        Assert.assertTrue(new BasePage(app.driver, app.wait).isUserLoggedIn(), "User is not logged in"); //реализовать на BasePage

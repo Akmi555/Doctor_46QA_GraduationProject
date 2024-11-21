@@ -69,6 +69,10 @@ public class LoginPage extends BasePage {
         click(kontoErstellen);
         return new LoginPage(driver, wait);
     }
+    public RegistrationPage navigateToRegistrationPage() {
+        click(kontoErstellen);
+        return new RegistrationPage(driver, wait);
+    }
 
     @FindBy(xpath = "//input[@id='isPersistent']")
     WebElement angemeldet;
@@ -77,4 +81,5 @@ public class LoginPage extends BasePage {
         click(angemeldet);
         return this;
     }
+
 }

@@ -1,15 +1,15 @@
 package com.doctor.pages;
 
-public class User {
+public class UserPage {
     private String email;
     private String password;
 
-    public User setEmail(String email) {
+    public UserPage setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public User setPassword(String password) {
+    public UserPage setPassword(String password) {
         this.password = password;
         return this;
     }

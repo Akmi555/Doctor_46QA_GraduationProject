@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -97,25 +98,21 @@ public class BasePage {
         // Возвращаем путь к сохраненному скриншоту
         return screenshot.getAbsolutePath();
     }
+    @FindBy(xpath = "//button[contains(text(),'Account')]")
+    WebElement accountButton;
     public boolean isUserLoggedIn() {
         try {
-            // Проверяем наличие кнопки выхода или другого элемента, указывающего, что пользователь вошел в систему
-            WebElement logoutButton = driver.findElement(By.xpath("//button[contains(text(),'Logout')]"));
-            return isElementPresent(logoutButton);
-        } catch (NoSuchElementException e) {
+            wait.until(ExpectedConditions.visibilityOf(accountButton));
+            return true; // User is logged in if the Account button is visible
+        } catch (TimeoutException e) {
+            // Account button not found within the timeout period, so user is likely NOT logged in
             return false;
         }
-    }
 
-    public boolean isUserLoggedIn() {
-        try {
-            // Проверяем наличие кнопки выхода или другого элемента, указывающего, что пользователь вошел в систему
-            WebElement logoutButton = driver.findElement(By.xpath("//button[contains(text(),'Logout')]"));
-            return isElementPresent(logoutButton);
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 
 
-}
+    }
+
+
+

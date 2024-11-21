@@ -1,12 +1,12 @@
-package com.doctor.pages;
+package com.doctor.model;
 
-public class Contact {
+public class User {
     private String name;
     private String lastName;
     private String phone;
     private String email;
-    private String address;
-    private String description;
+    private String password;
+
 
     @Override
     public String toString() {
@@ -16,46 +16,40 @@ public class Contact {
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", phone='").append(phone).append('\'');
         sb.append(", email='").append(email).append('\'');
-        sb.append(", address='").append(address).append('\'');
+        sb.append(", password='").append(password).append('\'');
 
-        if (description != null && !description.isEmpty()) {
-            sb.append(", description='").append(description).append('\'');
-        }
 
         sb.append('}');
         return sb.toString();
     }
 
 
-    public Contact setName(String name) {
+    public User setName(String name) {
         this.name = name;
         return this;
     }
 
-    public Contact setLastName(String lastName) {
+    public User setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
 
-    public Contact setPhone(String phone) {
+    public User setPhone(String phone) {
         this.phone = phone;
         return this;
     }
 
-    public Contact setEmail(String email) {
+    public User setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public Contact setAddress(String address) {
-        this.address = address;
+    public User setPassword(String password) {
+        this.password = password;
         return this;
     }
 
-    public Contact setDescription(String description) {
-        this.description = description;
-        return this;
-    }
+
 
     public String getName() {
         return name;
@@ -73,11 +67,9 @@ public class Contact {
         return email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPassword() {
+        return password;
     }
 
-    public String getDescription() {
-        return description;
-    }
+
 }

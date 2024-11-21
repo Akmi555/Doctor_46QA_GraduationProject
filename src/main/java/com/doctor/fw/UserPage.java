@@ -1,11 +1,8 @@
 package com.doctor.fw;
 
 import com.doctor.core.BasePage;
-import com.doctor.pages.User;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 public class UserPage extends BasePage {
 
