@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 
 public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
-    protected static ApplicationManager app = new ApplicationManager(System.getProperty("browser", "chrome"));
+    public static ApplicationManager app = new ApplicationManager(System.getProperty("browser", "chrome"));
 
     @BeforeSuite
     public void setUp() {

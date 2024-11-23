@@ -4,6 +4,7 @@ import com.doctor.core.BasePage;
 import com.doctor.core.TestBase;
 import com.doctor.pages.HomePage;
 import com.doctor.pages.LoginPage;
+import com.doctor.pages.ProfilePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,7 +23,7 @@ public class LoginTests extends TestBase {
                 .enterPersonalData("alice.smith@t.test", "SecurePass1")
                 .isAnmeldenButtonIsPresent()
                 .clickAnmeldenButton();
-       Assert.assertTrue(new BasePage(app.driver, app.wait).isUserLoggedIn(), "User is not logged in"); //реализовать на BasePage
+       Assert.assertTrue(new HomePage(app.driver, app.wait).isUserLoggedIn(), "User is not logged in"); //реализовать на BasePage
     }
 
 

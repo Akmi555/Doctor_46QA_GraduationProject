@@ -53,14 +53,14 @@ public class RegistrationPage extends BasePage {
     WebElement telefonnummer;
 
     @FindBy(xpath = "//div[@class='form-group']//input[1]")
-    WebElement passwort;
+    WebElement password;
 
-    public RegistrationPage enterPatienDetails(String vorName, String nachName, String Email, String telefonNumber, String password) {
+    public RegistrationPage enterPatienDetails(String vorName, String nachName, String Email, String telefonNumber, String passWord) {
         type(vorname,vorName);
         type(nachname,nachName);
         type(email,Email);
         type(telefonnummer, telefonNumber);
-        type(passwort,password);
+        type(password,passWord);
         return this;
     }
     @FindBy(xpath = "//button[contains(text(),'Weiter')]")

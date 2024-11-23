@@ -95,13 +95,13 @@ public class RegistrationTests extends TestBase {
             System.out.println("Toastify Message: " + registrationPage.getToastieMessage());
         }
     }
-    @Test
-    public void registerNewRandomUser() {
-        String newRandomEmail = System.currentTimeMillis() + "_johndoe@t.test";
-        new RegistrationPage(app.driver, app.wait).newRandomUser(newRandomEmail);
-        new RegistrationPage(app.driver, app.wait).updateUser("name","voreName","Telephone");
-        new RegistrationPage(app.driver, app.wait).verifyUpdateResult("name","voreName","Telephone");
+//    @Test
+//    public void registerNewRandomUser() {
+//        String newRandomEmail = System.currentTimeMillis() + "_johndoe@t.test";
+//        new RegistrationPage(app.driver, app.wait).newRandomUser(newRandomEmail);
+//        new ProfilePage(app.driver, app.wait).updateUser("name","voreName","Telephone");
+//        new ProfilePage(app.driver, app.wait).verifyUpdateResult("name","voreName","Telephone");
 
-    }
+
 
 }

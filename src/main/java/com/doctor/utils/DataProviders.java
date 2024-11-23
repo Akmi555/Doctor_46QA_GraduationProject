@@ -80,5 +80,42 @@ public Iterator<Object[]> userRegistrationData() {
         reader.close();
         return list.iterator();
     }
+    @DataProvider
+    public Iterator<Object[]> userUpdateData() {
+        List<Object[]> list = new ArrayList<>();
+        list.add(new Object[]{"updatedUser1", "One", "1234567890", "NewPassword123"});
+        list.add(new Object[]{"updatedUser2", "Two",  "0987654321", "NewPassword456"});
+        list.add(new Object[]{"updatedUser3", "Three", "12345877655", "NewPassword789"});
 
+        return list.iterator();
+    }
+
+    @DataProvider(name = "userUpdateFromCSV")
+    public Iterator<Object[]> userUpdateFromCSV() throws IOException {
+        List<Object[]> list = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/data_csv/user_update.csv"));
+        String line = reader.readLine();
+        while (line != null) {
+            String[] split = line.split(",");
+            list.add(new Object[]{new User()
+                    .setName(split[0])
+                    .setLastName(split[1])
+                    .setPhone(split[2])
+                    .setPassword(split[3])
+            });
+            line = reader.readLine();
+        }
+        // Close the file reader
+        reader.close();
+        return list.iterator();
+    }
+
+    // Static method to create a User object for testing
+    public static User createUser(String name, String email, String phone, String password) {
+        return new User().setName(name).setEmail(email).setPhone(phone).setPassword(password);
+    }
 }
+
+
+
+

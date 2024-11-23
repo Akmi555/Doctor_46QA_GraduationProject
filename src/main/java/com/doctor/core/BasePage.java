@@ -17,7 +17,7 @@ import java.nio.file.Files;
 import java.time.Duration;
 
 public class BasePage {
-    Logger logger = LoggerFactory.getLogger(BasePage.class);
+    public Logger logger = LoggerFactory.getLogger(BasePage.class);
     public static WebDriver driver;
     public static WebDriverWait wait;
 
