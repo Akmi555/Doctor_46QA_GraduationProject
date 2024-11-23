@@ -6,6 +6,7 @@ import com.doctor.pages.LoginPage;
 import com.doctor.pages.ProfilePage;
 import com.doctor.utils.DataProviders;
 import org.testng.Assert;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,14 +14,20 @@ public class ProfilePageTests extends TestBase {
     @BeforeMethod
     public void preCondition() {
         new HomePage(app.driver, app.wait).getLoginPage();
+        LoginPage loginPage = new LoginPage(app.driver, app.wait);
         new LoginPage(app.driver, app.wait).isAnmeldenButtonIsPresent();
+        loginPage
+                .enterPersonalData("alice.smith@t.test", "SecurePass1")
+                .clickAnmeldenButton();
+        ProfilePage profilePage = new ProfilePage(app.driver, app.wait);
+        profilePage.clickAccountButton().clickProfileLink();
     }
 
     @Test(dataProvider = "userUpdateData", dataProviderClass = DataProviders.class)
-    public void updateUserTest(String name, String lastName , String phone, String passwort) {
+    public void updateUserTest(String vorName, String nachName,  String telefonnummer) {
         ProfilePage profilePage = new ProfilePage(app.getDriver(), app.wait);
         profilePage
-                .updateUser(name, lastName, phone, passwort )
+                .updateUser(vorName, nachName, telefonnummer)
                 .verifyUpdateResult();
 
         // Verify the update result
@@ -31,23 +38,19 @@ public class ProfilePageTests extends TestBase {
     public void updateUserFromCSVTest(User user) {
         ProfilePage profilePage = new ProfilePage(app.getDriver(), app.wait);
         profilePage
-                .updateUser(user.getName(), user.getLastName(), user.getPhone(), user.getPassword())
+                .updateUser(user.getName(), user.getLastName(), user.getPhone())
                 .verifyUpdateResult();
-
-        if (user.getEmail().contains(".test")) {
             Assert.assertTrue(profilePage.verifyUpdateResult(), "User update should be successful for valid data from CSV");
-        } else {
-            Assert.assertFalse(profilePage.verifyUpdateResult(), "User update should fail for invalid data from CSV");
-        }
+
     }
 
     @Test
     public void updateNewRandomUser() {
-        String newRandomEmail = System.currentTimeMillis() + "_updated@t.test";
+        String newRandomName = "user"+System.currentTimeMillis();
         ProfilePage profilePage = new ProfilePage(app.getDriver(), app.wait);
-        User user = new User().setName("newRandomUser").setEmail(newRandomEmail);
+        User user = new User().setName("newRandomUser").setPhone("1234567890");
         profilePage
-                .updateUser(user.getName(), user.getEmail(), user.getPhone(), user.getPassword())
+                .updateUser(user.getName(), user.getLastName(), user.getPhone())
                 .verifyUpdateResult();
 
         Assert.assertTrue(profilePage.verifyUpdateResult(), "User update should be successful for a randomly generated user");

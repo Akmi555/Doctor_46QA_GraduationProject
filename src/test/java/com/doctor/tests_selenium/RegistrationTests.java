@@ -20,6 +20,8 @@ public class RegistrationTests extends TestBase {
 
     @Test(dataProvider = "userRegistrationData", dataProviderClass = DataProviders.class)
     public void registrationTest(String vorName, String nachName, String email, String telefonnummer, String passwort) {
+        String newRandomEmail = System.currentTimeMillis() + email;
+        System.out.println(newRandomEmail);
         RegistrationPage registrationPage = new RegistrationPage(app.getDriver(), app.wait);
         registrationPage
                 .clickKontoErstellenButton()
@@ -44,33 +46,6 @@ public class RegistrationTests extends TestBase {
         }
     }
 
-    //    @Test(dataProvider = "userRegistrationFromCSV", dataProviderClass = DataProviders.class)
-//    public void registrationFromCSVTest(String vorName, String nachName, String email, String telefonnummer, String passwort) {
-//        String newRandomEmail= System.currentTimeMillis()+email;
-//        System.out.println(newRandomEmail);
-//        RegistrationPage registrationPage = new RegistrationPage(app.getDriver(), app.wait);
-//        registrationPage
-//                .clickKontoErstellenButton()
-//                .enterPatienDetails(vorName, nachName, newRandomEmail, telefonnummer, passwort)
-//                .clickWeiterLink();
-//
-//        if (newRandomEmail.endsWith(".test") && passwort.length() >= 8) {
-//            // Проверка успешной регистрации
-//            Assert.assertTrue(registrationPage.isRegistrationSuccessful(),
-//                    "Registration should be successful for valid data from CSV");
-//            Assert.assertTrue(registrationPage.redirectOnHomePage(),
-//                    "User should be redirected to HomePage with 'Account' button visible");
-//        } else {
-//            // Проверка неуспешной регистрации
-//            Assert.assertFalse(registrationPage.isRegistrationSuccessful(),
-//                    "Registration should fail for invalid data from CSV");
-//
-//            // Проверяем, что Toastify сообщение отображается
-//            Assert.assertTrue(registrationPage.isElementPresent(registrationPage.toastifyMessage),
-//                    "Toastify message should appear for invalid registration");
-//            System.out.println("Toastify Message: " + registrationPage.getToastieMessage());
-//        }
-//    }
     @Test(dataProvider = "userRegistrationFromCSV", dataProviderClass = DataProviders.class)
     public void registrationFromCSVTest(User user) {
         String newRandomEmail = System.currentTimeMillis() + user.getEmail();

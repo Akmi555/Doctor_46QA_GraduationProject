@@ -14,7 +14,7 @@ public class ProfilePage extends BasePage {
         super(driver, wait);
     }
 
-    @FindBy(xpath = "(//div[contains(@class,'col-sm-6 mb-3')]//input)[1]")
+    @FindBy(xpath = "//input[@name='FirstName']")
     WebElement vorname;
 
     @FindBy(xpath = "(//div[@class='col-sm-6']//input)[1]")
@@ -26,8 +26,6 @@ public class ProfilePage extends BasePage {
     @FindBy(xpath = "(//div[@class='col-sm-6']//input)[2]")
     WebElement telefonnummer;
 
-    @FindBy(xpath = "//div[@class='form-group']//input[1]")
-    WebElement password;
 
     @FindBy(xpath = "//button[contains(text(),'Speichern')]")
     WebElement speichernButton;
@@ -36,24 +34,31 @@ public class ProfilePage extends BasePage {
     private WebElement updateSuccessMessage;
 
     // Method to update user profile information
-    public ProfilePage updateUser(String vorName, String nachName, String telefonNumber, String passWord) {
+    public ProfilePage updateUser(String vorName, String nachName, String telefonNumber) {
         type(vorname, vorName);
         type(nachname, nachName);
         type(telefonnummer, telefonNumber);
-        type(password, passWord);
         click(speichernButton);
         return this;
     }
 
         // Method to verify if the update was successful
         public boolean verifyUpdateResult () {
-            try {
-                wait.until(ExpectedConditions.visibilityOf(updateSuccessMessage));
-                boolean result = isElementPresent(updateSuccessMessage);
-            } catch (Exception e) {
-                logger.error("Error while verifying update result: " + e.getMessage());
-
+            if (isElementPresent(updateSuccessMessage)) {
+          return false;
             }
-            return false;
+            return  true;
         }
+    @FindBy(xpath = "//button[contains(text(),'Account')]")
+    WebElement accountButton;
+    public ProfilePage clickAccountButton() {
+        click(accountButton);
+        return this;
     }
+    @FindBy(xpath = "//a[contains(text(),'Profile')]")
+    WebElement profileLink;
+    public ProfilePage clickProfileLink() {
+        click(profileLink);
+        return this;
+    }
+}

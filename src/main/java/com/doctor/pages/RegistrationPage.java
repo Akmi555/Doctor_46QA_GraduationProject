@@ -99,9 +99,7 @@ public class RegistrationPage extends BasePage {
         // Проверяем, что пользователь находится на HomePage
         return redirectOnHomePage();
     }
-    public void newRandomUser(String email) {
 
-    }
     /**
      * Проверяет успешность регистрации
      * @return true, если регистрация прошла успешно; false, если возникла ошибка

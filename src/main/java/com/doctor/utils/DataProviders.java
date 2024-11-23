@@ -83,9 +83,9 @@ public Iterator<Object[]> userRegistrationData() {
     @DataProvider
     public Iterator<Object[]> userUpdateData() {
         List<Object[]> list = new ArrayList<>();
-        list.add(new Object[]{"updatedUser1", "One", "1234567890", "NewPassword123"});
-        list.add(new Object[]{"updatedUser2", "Two",  "0987654321", "NewPassword456"});
-        list.add(new Object[]{"updatedUser3", "Three", "12345877655", "NewPassword789"});
+        list.add(new Object[]{"updatedUser1", "One", "1234567890"});
+        list.add(new Object[]{"updatedUser2", "Two",  "0987654321"});
+        list.add(new Object[]{"updatedUser3", "Three", "12345877655"});
 
         return list.iterator();
     }
@@ -93,7 +93,7 @@ public Iterator<Object[]> userRegistrationData() {
     @DataProvider(name = "userUpdateFromCSV")
     public Iterator<Object[]> userUpdateFromCSV() throws IOException {
         List<Object[]> list = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/data_csv/user_update.csv"));
+        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/data_csv/update.csv"));
         String line = reader.readLine();
         while (line != null) {
             String[] split = line.split(",");
@@ -101,7 +101,7 @@ public Iterator<Object[]> userRegistrationData() {
                     .setName(split[0])
                     .setLastName(split[1])
                     .setPhone(split[2])
-                    .setPassword(split[3])
+
             });
             line = reader.readLine();
         }
