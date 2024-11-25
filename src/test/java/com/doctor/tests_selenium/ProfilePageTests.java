@@ -7,8 +7,7 @@ import com.doctor.pages.ProfilePage;
 import com.doctor.utils.DataProviders;
 import org.testng.Assert;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class ProfilePageTests extends TestBase {
     @BeforeMethod
@@ -54,5 +53,13 @@ public class ProfilePageTests extends TestBase {
                 .verifyUpdateResult();
 
         Assert.assertTrue(profilePage.verifyUpdateResult(), "User update should be successful for a randomly generated user");
+    }
+    @AfterMethod
+    public void postCondition() {
+        // Разлогин после каждого теста, чтобы вернуть систему в начальное состояние
+        ProfilePage profilePage = new ProfilePage(app.driver, app.wait);
+        profilePage.clickAccountButton().clickLogoutButton();
+
+
     }
 }
