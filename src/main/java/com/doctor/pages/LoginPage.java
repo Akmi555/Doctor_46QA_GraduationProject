@@ -1,11 +1,17 @@
 package com.doctor.pages;
 
 import com.doctor.core.BasePage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+
+import static com.doctor.core.BasePage.driver;
+import static com.doctor.core.BasePage.wait;
 
 public class LoginPage extends BasePage {
 
@@ -14,18 +20,6 @@ public class LoginPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//button[contains(text(),'Anmelden')]")
-    WebElement anmeldenButton;
-
-    public LoginPage isAnmeldenButtonIsPresent() {
-        isElementPresent(anmeldenButton);
-        return this;
-    }
-
-    public HomePage clickAnmeldenButton() {
-        click(anmeldenButton);
-        return new HomePage(driver, wait);
-    }
 
     @FindBy(xpath = "//input[@type='email']")
     WebElement emailInput;
@@ -54,14 +48,6 @@ public class LoginPage extends BasePage {
     }
 
 
-    @FindBy(xpath = "//button[contains(@class,'btn btn-primary')]")
-    WebElement anmeldenLink;
-
-    public LoginPage clickOnAnmeldenLink() {
-        click(anmeldenLink);
-        return new LoginPage(driver, wait);
-    }
-
     @FindBy(xpath = "//a[contains(text(),'Konto erstellen')]")
     WebElement kontoErstellen;
 
@@ -69,6 +55,7 @@ public class LoginPage extends BasePage {
         click(kontoErstellen);
         return new LoginPage(driver, wait);
     }
+
     public RegistrationPage navigateToRegistrationPage() {
         click(kontoErstellen);
         return new RegistrationPage(driver, wait);
@@ -82,4 +69,49 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    @FindBy(xpath = "//div[contains(text(), 'Falsche Daten')]")
+    WebElement falscheDatenNotification;
+
+    public boolean isFalscheDatenNotificationPresent() {
+        try {
+            // Ожидание появления элемента
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Falsche Daten')]")));
+
+            // Проверка текста элемента
+            String actualText = falscheDatenNotification.getText();
+            Assert.assertTrue(actualText.contains("Falsche Daten"), "Текст уведомления не совпадает!");
+
+            // Ожидание исчезновения элемента
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Falsche Daten')]")));
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("Ошибка: уведомление 'Falsche Daten' не обработано. Причина: " + e.getMessage());
+            return false;
+        }
+//
+    }
+
+
+    @FindBy(xpath = "//button[contains(text(),'Anmelden')]")
+    WebElement anmeldenLink;
+
+    public LoginPage isAnmeldenButtonIsPresent() {
+        isElementPresent(anmeldenLink);
+        return this;
+    }
+
+    public LoginPage clickOnAnmeldenLink() {
+        click(anmeldenLink);
+        return this;
+    }
+
+
 }
+
+
+//WebElement inputField = driver.findElement(By.cssSelector("селектор_поля"));
+//String validationMessage = (String) jsExecutor.executeScript(
+//    "return arguments[0].validationMessage;", inputField
+//);
+//System.out.println("Validation message: " + validationMessage);

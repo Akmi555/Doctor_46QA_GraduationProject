@@ -2,11 +2,15 @@ package com.doctor.pages;
 
 
 import com.doctor.core.BasePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 
 public class RegistrationPage extends BasePage {
@@ -70,35 +74,42 @@ public class RegistrationPage extends BasePage {
         click(weiterButton);
         return new RegistrationPage(driver,wait);
     }
-    @FindBy(xpath = "//button[contains(text(),'Account')]")
-    WebElement accountButton;
+    @FindBy(xpath = "//div[contains(text(),\"Username 'alice.smith@t.test' is already taken\")]")
+    WebElement userNameAlreadyTakenNotification;
+
+    public boolean isUserNameAlreadyTakenNotificationPresent() {
+        try {
+            // Ожидание появления элемента
+            wait.until(ExpectedConditions.visibilityOf(userNameAlreadyTakenNotification));
+
+            // Проверка текста элемента
+            String actualText = userNameAlreadyTakenNotification.getText();
+            Assert.assertTrue(actualText.contains("Username 'alice.smith@t.test' is already taken."),
+                    "Текст уведомления не совпадает! Ожидается: 'Username 'alice.smith@t.test' is already taken.'");
+
+            // Уведомление найдено
+            return true;
+        } catch (TimeoutException e) {
+            System.err.println("Ошибка: уведомление 'Username 'alice.smith@t.test' is already taken.' не появилось вовремя.");
+            return false;
+        } catch (Exception e) {
+            System.err.println("Ошибка: уведомление 'Username 'alice.smith@t.test' is уже не обработано. Причина: " + e.getMessage());
+            return false;
+        }
+    }
 
     /**
      * Проверяет успешное перенаправление на HomePage
      * @return true, если кнопка "Account" отображается
      */
-    public boolean redirectOnHomePage() {
-        return isElementPresent(accountButton);
-    }
-    @FindBy(xpath = "//footer[@class='footer py-4']/following-sibling::div[1]")
-    public WebElement toastifyMessage;
-    public WebElement getToastieMessage() {
-        return toastifyMessage;
-    }
+
+
     // Проверка наличия элемента Toastify
-    public boolean isToastifyMessageDisplayed() {
-        return isElementPresent(toastifyMessage);
-    }
 
-    public boolean isRegistrationSuccessful() {
-        // Проверяем, что сообщение Toastify отсутствует
-        if (isElementPresent(toastifyMessage)) {
-            return false;
-        }
-
-        // Проверяем, что пользователь находится на HomePage
-        return redirectOnHomePage();
-    }
+//    public HomePage redirectOnHomePage() {
+//        // Проверяем, что пользователь находится на HomePage
+//        return new HomePage(driver, wait);
+//    }
 
     /**
      * Проверяет успешность регистрации

@@ -1,4 +1,5 @@
 package com.doctor.tests_selenium;
+
 import com.doctor.model.User;
 import com.doctor.core.TestBase;
 import com.doctor.pages.HomePage;
@@ -14,19 +15,22 @@ public class ProfilePageTests extends TestBase {
     public void preCondition() {
         new HomePage(app.driver, app.wait).getLoginPage();
         LoginPage loginPage = new LoginPage(app.driver, app.wait);
-        new LoginPage(app.driver, app.wait).isAnmeldenButtonIsPresent();
         loginPage
+
                 .enterPersonalData("alice.smith@t.test", "SecurePass1")
-                .clickAnmeldenButton();
-        ProfilePage profilePage = new ProfilePage(app.driver, app.wait);
-        profilePage.clickAccountButton().clickProfileLink();
+                .clickOnAnmeldenLink();
+                HomePage homePage = new HomePage(app.driver, app.wait);
+                homePage
+                .clickProfileLink();
+
     }
 
     @Test(dataProvider = "userUpdateData", dataProviderClass = DataProviders.class)
-    public void updateUserTest(String vorName, String nachName,  String telefonnummer) {
+    public void updateUserTest(String vorName, String nachName, String telefonnummer) {
+        String updateVorName = vorName + System.currentTimeMillis();
         ProfilePage profilePage = new ProfilePage(app.getDriver(), app.wait);
         profilePage
-                .updateUser(vorName, nachName, telefonnummer)
+                .updateUser(updateVorName, nachName, telefonnummer)
                 .verifyUpdateResult();
 
         // Verify the update result
@@ -35,30 +39,33 @@ public class ProfilePageTests extends TestBase {
 
     @Test(dataProvider = "userUpdateFromCSV", dataProviderClass = DataProviders.class)
     public void updateUserFromCSVTest(User user) {
+        String updateName = user.getName() + System.currentTimeMillis();
+        System.out.println(updateName);
         ProfilePage profilePage = new ProfilePage(app.getDriver(), app.wait);
         profilePage
-                .updateUser(user.getName(), user.getLastName(), user.getPhone())
+                .updateUser(updateName, user.getLastName(), user.getPhone())
                 .verifyUpdateResult();
-            Assert.assertTrue(profilePage.verifyUpdateResult(), "User update should be successful for valid data from CSV");
+        Assert.assertTrue(profilePage.verifyUpdateResult(), "User update should be successful for valid data from CSV");
 
     }
 
     @Test
     public void updateNewRandomUser() {
-        String newRandomName = "user"+System.currentTimeMillis();
+        String newRandomName = "Tom" + System.currentTimeMillis();
+        System.out.println(newRandomName);
         ProfilePage profilePage = new ProfilePage(app.getDriver(), app.wait);
-        User user = new User().setName("newRandomUser").setPhone("1234567890");
+        User user = new User().setName(newRandomName).setPhone("1234567890");
         profilePage
                 .updateUser(user.getName(), user.getLastName(), user.getPhone())
                 .verifyUpdateResult();
 
         Assert.assertTrue(profilePage.verifyUpdateResult(), "User update should be successful for a randomly generated user");
     }
+
     @AfterMethod
     public void postCondition() {
-        // Разлогин после каждого теста, чтобы вернуть систему в начальное состояние
-        ProfilePage profilePage = new ProfilePage(app.driver, app.wait);
-        profilePage.clickAccountButton().clickLogoutButton();
+        new HomePage(app.driver, app.wait).clickAccountButton();
+        new HomePage(app.driver, app.wait).clickLogoutButton();
 
 
     }

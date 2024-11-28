@@ -1,5 +1,6 @@
 package com.doctor.core;
 
+import com.doctor.pages.ProfilePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -37,7 +38,8 @@ public class BasePage {
             return false;
         }
     }
-    public void launchBrowser(){
+
+    public void launchBrowser() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
@@ -49,7 +51,7 @@ public class BasePage {
 
     protected void click(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-       // element.click();
+        // element.click();
         logger.info("[" + element + "] is pressed");
     }
 
@@ -98,21 +100,18 @@ public class BasePage {
         // Возвращаем путь к сохраненному скриншоту
         return screenshot.getAbsolutePath();
     }
-    @FindBy(xpath = "//button[contains(text(),'Account')]")
-    WebElement accountButton;
-    public boolean isUserLoggedIn() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(accountButton));
-            return true; // User is logged in if the Account button is visible
-        } catch (TimeoutException e) {
-            // Account button not found within the timeout period, so user is likely NOT logged in
-            return false;
-        }
-
-    }
-
-
-    }
 
 
 
+
+//    public boolean isUserLoggedIn() {
+//        try {
+//            wait.until(ExpectedConditions.visibilityOf(accountButton));
+//            return true; // User is logged in if the Account button is visible
+//        } catch (TimeoutException e) {
+//            // Account button not found within the timeout period, so user is likely NOT logged in
+//            return false;
+//        }
+//    }
+
+}

@@ -32,7 +32,7 @@ public class HomePage extends BasePage {
         return new LoginPage(driver, wait);
     }
 
-//    public boolean isTeamButtonPresent() {
+    //    public boolean isTeamButtonPresent() {
 //        return teamButton.isDisplayed();
 //    }
     public void openHomePage() {
@@ -107,4 +107,42 @@ public class HomePage extends BasePage {
         click(schropftherapieLink);
         return new HomePage(driver, wait);
     }
+
+    @FindBy(xpath = "//a[contains(text(),'Profile')]")
+    WebElement profileLink;
+
+  public ProfilePage clickProfileLink() {
+      click(accountButton);
+      click(profileLink);
+      return new ProfilePage(driver, wait);
+
+  }
+
+    @FindBy(xpath = "//a[contains(text(),'Logout')]")
+    WebElement logoutButton;
+
+    public HomePage clickLogoutButton() {
+        click(logoutButton);
+        return new HomePage(driver, wait);
+    }
+    @FindBy(xpath = "//button[text()='Account']")
+    WebElement accountButton;
+
+    public LoginPage clickAccountButton() {
+        click(accountButton);
+        return new LoginPage(driver, wait);
+    }
+    public boolean isAccountButtonPresent() {
+        return isElementPresent(accountButton);
+    }
+
+
+
+
+
+
+
+
+
 }
+

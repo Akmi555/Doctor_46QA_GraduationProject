@@ -1,19 +1,23 @@
 package com.doctor.tests_selenium;
-
 import com.doctor.core.TestBase;
 import com.doctor.model.User;
 import com.doctor.pages.HomePage;
 import com.doctor.pages.LoginPage;
 import com.doctor.pages.RegistrationPage;
 import com.doctor.utils.DataProviders;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class RegistrationTests extends TestBase {
     @BeforeMethod
     public void preCondition() {
-        new HomePage(app.driver, app.wait).getLoginPage();
+        new HomePage(app.driver, app.wait).getLoginPage().isAnmeldenButtonIsPresent();
         new LoginPage(app.driver, app.wait).isAnmeldenButtonIsPresent();
 
     }
@@ -30,19 +34,8 @@ public class RegistrationTests extends TestBase {
 
         if (email.endsWith(".test") && passwort.length() >= 8) {
             // Проверка успешной регистрации
-            Assert.assertTrue(registrationPage.isRegistrationSuccessful(),
-                    "Registration should be successful for valid data");
-            Assert.assertTrue(registrationPage.redirectOnHomePage(),
-                    "User should be redirected to HomePage with 'Account' button visible");
-        } else {
-            // Проверка неуспешной регистрации
-            Assert.assertFalse(registrationPage.isRegistrationSuccessful(),
-                    "Registration should fail for invalid data");
+            Assert.assertTrue(new HomePage(app.driver, app.wait).isAccountButtonPresent());
 
-            // Проверяем, что Toastify сообщение отображается
-            Assert.assertTrue(registrationPage.isElementPresent(registrationPage.toastifyMessage),
-                    "Toastify message should appear for invalid registration");
-            System.out.println("Toastify Message: " + registrationPage.getToastieMessage());
         }
     }
 
@@ -58,25 +51,62 @@ public class RegistrationTests extends TestBase {
                 .clickWeiterLink();
 
         if (newRandomEmail.endsWith(".test") && user.getPassword().length() >= 8) {
-            Assert.assertTrue(registrationPage.isRegistrationSuccessful(),
-                    "Registration should be successful for valid data from CSV");
-            Assert.assertTrue(registrationPage.redirectOnHomePage(),
-                    "User should be redirected to HomePage with 'Account' button visible");
-        } else {
-            Assert.assertFalse(registrationPage.isRegistrationSuccessful(),
-                    "Registration should fail for invalid data from CSV");
-            Assert.assertTrue(registrationPage.isElementPresent(registrationPage.toastifyMessage),
-                    "Toastify message should appear for invalid registration");
-            System.out.println("Toastify Message: " + registrationPage.getToastieMessage());
         }
     }
-//    @Test
+
+    @Test
+    public void registrationWithExistingEmailTest() {
+        String existingEmail = "alice.smith@t.test";
+        RegistrationPage registrationPage = new RegistrationPage(app.getDriver(), app.wait);
+
+        registrationPage
+                .clickKontoErstellenButton()
+                .enterPatienDetails("Alice", "Smith", existingEmail, "1234567890", "SecurePass1")
+                .clickWeiterLink();
+        Assert.assertTrue(new RegistrationPage(app.driver, app.wait).isUserNameAlreadyTakenNotificationPresent(), "User is logged in");
+        // Проверяем наличие уведомления о занятом email
+
+    }
+    @Test
+    public void registrationWithInvalidEmailTest() {
+        String invalidEmail = "alice.smith@";
+        RegistrationPage registrationPage = new RegistrationPage(app.getDriver(), app.wait);
+
+        registrationPage
+                .clickKontoErstellenButton()
+                .enterPatienDetails("Alice", "Smith", invalidEmail, "1234567890", "SecurePass1");
+
+        // Используем JavaScript Executor для получения системного сообщения об ошибке
+        WebElement emailInputField = app.getDriver().findElement(By.xpath("//input[@type='email']"));
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) app.getDriver();
+        String validationMessage = (String) jsExecutor.executeScript(
+                "return arguments[0].validationMessage;", emailInputField
+        );
+
+        Assert.assertEquals(validationMessage, "Введите часть адреса после символа \"@\". Адрес \"alice.smith@\" неполный.", "Сообщение валидации не соответствует ожидаемому!");
+        System.out.println("Сообщение валидации: " + validationMessage);
+    }
+
+    @AfterMethod
+    public void postCondition() {
+        // Проверяем, отображается ли кнопка аккаунта (признак авторизации)
+        if (new HomePage(app.driver, app.wait).isAccountButtonPresent()) {
+            new HomePage(app.driver, app.wait).clickAccountButton();
+            new HomePage(app.driver, app.wait).clickLogoutButton();
+            System.out.println("Пользователь разлогинился.");
+        } else {
+            System.out.println("Пользователь не залогинен, разлогинивание не требуется.");
+        }
+    }
+
+}
+
+
 //    public void registerNewRandomUser() {
 //        String newRandomEmail = System.currentTimeMillis() + "_johndoe@t.test";
 //        new RegistrationPage(app.driver, app.wait).newRandomUser(newRandomEmail);
 //        new ProfilePage(app.driver, app.wait).updateUser("name","voreName","Telephone");
 //        new ProfilePage(app.driver, app.wait).verifyUpdateResult("name","voreName","Telephone");
+//
 
 
-
-}

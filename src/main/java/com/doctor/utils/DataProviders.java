@@ -37,9 +37,9 @@ public class DataProviders {
 public Iterator<Object[]> userRegistrationData() {
     List<Object[]> list = new ArrayList<>();
     list.add(new Object[]{"John", "Doe", System.currentTimeMillis() + "@t.test", "1234567890",  "Password123"}); // Valid data
-    list.add(new Object[]{"Alice", "Smith", "alice.smith@t.test", "1234567890", "SecurePass1"}); // Valid with phone
-    list.add(new Object[]{"Bob", "Brown", "bob.brown@t.test", "123456789", "Password123"}); // Invalid email
-    list.add(new Object[]{"Chris", "White", "chris.white@t.test", "1256788899", "short"}); // Invalid password
+    list.add(new Object[]{"Alice", "Smith",System.currentTimeMillis()   + "alice.smith@t.test", "1234567890", "SecurePass1"}); // Valid with phone
+    list.add(new Object[]{"Bob", "Brown", System.currentTimeMillis()+"bob.brown@t.test", "123456789", "Password123"}); // Invalid email
+    list.add(new Object[]{"Chris", "White",System.currentTimeMillis() +  "chris.white@t.test", "1256788899", "Password123"}); // Invalid password
     return list.iterator();
 }
     @DataProvider

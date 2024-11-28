@@ -46,10 +46,10 @@ public class ApplicationManager {
 
         driver.get("https://gesundheitspraxis-wertvoll.de");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
 //
 ////        userPage = new UserPage(driver, wait);
@@ -58,18 +58,14 @@ public class ApplicationManager {
     }
 
 
-//    public UserPage getUserPage() {
-//        return userPage;
-//    }
+
 
     public HomePage getHomePage() {
         return homePage;
     }
 
 
-//    public ContactPage getContactPage() {
-//        return contactPage;
-//    }
+
 
     public void stop() {
         if (driver != null) {
