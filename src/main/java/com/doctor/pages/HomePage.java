@@ -58,7 +58,7 @@ public class HomePage extends BasePage {
 
     public HomePage clickInfusionstherapieLink() {
         click(infusionstherapieLink);
-        return new HomePage(driver, wait);
+        return this;
     }
 
     @FindBy(xpath = "//h2[contains(text(),'Infusionstherapie')]")
@@ -75,7 +75,7 @@ public class HomePage extends BasePage {
 
     public HomePage clikPortfolio() {
         click(portfolioLink);
-        return new HomePage(driver, wait);
+        return this;
     }
 
     @FindBy(xpath = "//h2[contains(text(),'Meine Leistungen')]")
@@ -136,6 +136,7 @@ public class HomePage extends BasePage {
         return isElementPresent(accountButton);
     }
 
+    }
 
 
 
@@ -144,5 +145,6 @@ public class HomePage extends BasePage {
 
 
 
-}
+
+
 

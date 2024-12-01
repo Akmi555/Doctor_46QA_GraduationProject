@@ -1,7 +1,6 @@
 package com.doctor.core;
 
 import com.doctor.pages.HomePage;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

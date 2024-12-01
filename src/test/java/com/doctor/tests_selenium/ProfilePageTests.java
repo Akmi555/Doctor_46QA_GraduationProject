@@ -19,8 +19,8 @@ public class ProfilePageTests extends TestBase {
 
                 .enterPersonalData("alice.smith@t.test", "SecurePass1")
                 .clickOnAnmeldenLink();
-                HomePage homePage = new HomePage(app.driver, app.wait);
-                homePage
+        HomePage homePage = new HomePage(app.driver, app.wait);
+        homePage
                 .clickProfileLink();
 
     }
@@ -61,12 +61,65 @@ public class ProfilePageTests extends TestBase {
 
         Assert.assertTrue(profilePage.verifyUpdateResult(), "User update should be successful for a randomly generated user");
     }
+    @Test
+    public void updateUserWithEmptyVornameTest() {
+        ProfilePage profilePage = new ProfilePage(app.getDriver(), app.wait);
+
+        // Оставляем поле Vorname пустым
+        profilePage
+                .updateUser("", "Smith", "1234567890");
+
+        // Проверяем сообщение о валидации
+        String validationMessage = profilePage.getValidationMessage(profilePage.vorname);
+        Assert.assertEquals(validationMessage, "Заполните это поле.", "Сообщение валидации для Vorname не соответствует ожидаемому!");
+        System.out.println("Сообщение валидации для Vorname: " + validationMessage);
+    }
+
+    @Test
+    public void updateUserWithEmptyNachnameTest() {
+        ProfilePage profilePage = new ProfilePage(app.getDriver(), app.wait);
+
+        // Оставляем поле Nachname пустым
+        profilePage
+                .updateUser("Alice", "", "1234567890");
+
+        // Проверяем сообщение о валидации
+        String validationMessage = profilePage.getValidationMessage(profilePage.nachname);
+        Assert.assertEquals(validationMessage, "Заполните это поле.", "Сообщение валидации для Nachname не соответствует ожидаемому!");
+        System.out.println("Сообщение валидации для Nachname: " + validationMessage);
+    }
+
 
     @AfterMethod
     public void postCondition() {
-        new HomePage(app.driver, app.wait).clickAccountButton();
-        new HomePage(app.driver, app.wait).clickLogoutButton();
+        try {
+            // Проверяем, отображается ли сообщение об успешном обновлении
+            ProfilePage profilePage = new ProfilePage(app.driver, app.wait);
+            if (profilePage.verifyUpdateResult()) {
+                // Закрываем всплывающее окно, если оно есть
+                profilePage.clickCloseupdateSuccessMessageButton();
+                System.out.println("Всплывающее окно успешно закрыто.");
+            } else {
+                System.out.println("Сообщение об успешном обновлении отсутствует, пропускаем закрытие всплывающего окна.");
+            }
+        } catch (Exception e) {
+            System.err.println("Ошибка при проверке или закрытии всплывающего окна: " + e.getMessage());
+        }
 
-
+        try {
+            // Проверяем, отображается ли кнопка аккаунта (признак авторизации)
+            HomePage homePage = new HomePage(app.driver, app.wait);
+            if (homePage.isAccountButtonPresent()) {
+                homePage.clickAccountButton();
+                homePage.clickLogoutButton();
+                System.out.println("Пользователь разлогинился.");
+            } else {
+                System.out.println("Пользователь не залогинен, разлогинивание не требуется.");
+            }
+        } catch (Exception e) {
+            System.err.println("Ошибка при разлогинивании: " + e.getMessage());
+        }
     }
+
 }
+

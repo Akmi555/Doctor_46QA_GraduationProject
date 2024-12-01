@@ -10,8 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 
-import static com.doctor.core.BasePage.driver;
-import static com.doctor.core.BasePage.wait;
+
 
 public class LoginPage extends BasePage {
 

@@ -21,6 +21,7 @@ public class BasePage {
     public Logger logger = LoggerFactory.getLogger(BasePage.class);
     public static WebDriver driver;
     public static WebDriverWait wait;
+    public JavascriptExecutor js;
 
     public BasePage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
@@ -102,6 +103,31 @@ public class BasePage {
     }
 
 
+    public void scrollToElement(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        js.executeScript("arguments[0].scrollIntoView();", element); //js.executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    protected void scrollTo(int y) {
+        js.executeScript("window.scrollBy(" + 0 + "," + y + ")");
+    }
+
+    public void clickElementWithJs(WebElement element) {
+        try {
+            // Проверяем, отображается ли элемент на странице
+            if (element.isDisplayed()) {
+                JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+                jsExecutor.executeScript("arguments[0].click();", element);
+                System.out.println("Элемент успешно нажат с помощью JavaScript.");
+            } else {
+                System.err.println("Элемент не отображается на странице, клик через JS не выполнен.");
+            }
+        } catch (Exception e) {
+            System.err.println("Ошибка при клике через JavaScript: " + e.getMessage());
+        }
+    }
+}
 
 
 //    public boolean isUserLoggedIn() {
@@ -114,4 +140,3 @@ public class BasePage {
 //        }
 //    }
 
-}

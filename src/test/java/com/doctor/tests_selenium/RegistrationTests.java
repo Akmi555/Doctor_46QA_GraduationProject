@@ -1,4 +1,5 @@
 package com.doctor.tests_selenium;
+
 import com.doctor.core.TestBase;
 import com.doctor.model.User;
 import com.doctor.pages.HomePage;
@@ -9,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -67,6 +67,7 @@ public class RegistrationTests extends TestBase {
         // Проверяем наличие уведомления о занятом email
 
     }
+
     @Test
     public void registrationWithInvalidEmailTest() {
         String invalidEmail = "alice.smith@";
@@ -89,17 +90,18 @@ public class RegistrationTests extends TestBase {
 
     @AfterMethod
     public void postCondition() {
-        // Проверяем, отображается ли кнопка аккаунта (признак авторизации)
-        if (new HomePage(app.driver, app.wait).isAccountButtonPresent()) {
-            new HomePage(app.driver, app.wait).clickAccountButton();
-            new HomePage(app.driver, app.wait).clickLogoutButton();
-            System.out.println("Пользователь разлогинился.");
-        } else {
-            System.out.println("Пользователь не залогинен, разлогинивание не требуется.");
+            // Проверяем, авторизован ли пользователь
+            if (new HomePage(app.driver, app.wait).isAccountButtonPresent()) {
+                new HomePage(app.driver, app.wait).clickAccountButton();
+                new HomePage(app.driver, app.wait).clickLogoutButton();
+                System.out.println("Пользователь разлогинился.");
+            } else {
+                System.out.println("Пользователь не авторизован, разлогинивание не требуется.");
+            }
         }
     }
 
-}
+
 
 
 //    public void registerNewRandomUser() {
