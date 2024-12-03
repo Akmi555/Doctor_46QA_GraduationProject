@@ -50,7 +50,7 @@ public class BasePage {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2)); // неявное
     }
 
-    protected void click(WebElement element) {
+    public void click(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
         // element.click();
         logger.info("[" + element + "] is pressed");
