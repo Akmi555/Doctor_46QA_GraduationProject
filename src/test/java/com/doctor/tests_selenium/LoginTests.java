@@ -1,11 +1,7 @@
 package com.doctor.tests_selenium;
-
-
 import com.doctor.core.TestBase;
 import com.doctor.pages.HomePage;
 import com.doctor.pages.LoginPage;
-
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -51,4 +47,24 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(new LoginPage(app.driver, app.wait).isFalscheDatenNotificationPresent(), "User is logged in");
     }
 
+    @AfterMethod
+    public void postCondition() {
+        // Проверяем, находится ли пользователь на домашней странице
+        HomePage homePage = new HomePage(app.driver, app.wait);
+        if (homePage.isAccountButtonPresent()) {
+            // Пользователь уже на домашней странице, ничего не делаем
+            return;
+        }
+
+        // Если пользователь не на домашней странице, то:
+        LoginPage loginPage = new LoginPage(app.driver, app.wait);
+
+        if (loginPage.isFalscheDatenNotificationPresent()) {
+            // Пользователь на странице логина с ошибкой, возвращаемся на домашнюю
+            new HomePage(app.driver, app.wait).getHomePage();
+        } else {
+            // Возможно, тест не завершился логином, но мы убедимся, что мы возвращаемся на домашнюю
+            homePage.getHomePage();
+        }
+    }
 }

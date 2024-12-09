@@ -1,5 +1,4 @@
 package com.doctor.tests_selenium;
-
 import com.doctor.core.TestBase;
 import com.doctor.model.User;
 import com.doctor.pages.HomePage;
@@ -90,25 +89,31 @@ public class RegistrationTests extends TestBase {
 
     @AfterMethod
     public void postCondition() {
-            // Проверяем, авторизован ли пользователь
-            if (new HomePage(app.driver, app.wait).isAccountButtonPresent()) {
-                new HomePage(app.driver, app.wait).clickAccountButton();
-                new HomePage(app.driver, app.wait).clickLogoutButton();
-                System.out.println("Пользователь разлогинился.");
+        try {
+            HomePage homePage = new HomePage(app.driver, app.wait);
+            RegistrationPage registrationPage = new RegistrationPage(app.driver, app.wait);
+
+            // Проверяем, успешна ли регистрация (по наличию кнопки аккаунта)
+            if (homePage.isAccountButtonPresent()) {
+                // Пользователь авторизован, разлогиниваемся
+                homePage.clickAccountButton();
+                homePage.clickLogoutButton();
+                System.out.println("Пользователь успешно разлогинился после успешной регистрации.");
             } else {
-                System.out.println("Пользователь не авторизован, разлогинивание не требуется.");
+                // Проверяем наличие сообщения об ошибке
+                if (registrationPage.isRegistrationErrorMessagePresent()) {
+                    registrationPage.closeRegistrationErrorMessage(); // Закрываем сообщение об ошибке
+                    System.out.println("Сообщение об ошибке закрыто.");
+                } else {
+                    System.out.println("Сообщения об ошибке нет, дополнительных действий не требуется.");
+                }
+                // Перенаправляем на домашнюю страницу, если требуется
+                homePage.getHomePage();
+                System.out.println("Пользователь возвращен на домашнюю страницу.");
             }
+        } catch (Exception e) {
+            System.err.println("Ошибка в @AfterMethod: " + e.getMessage());
         }
     }
-
-
-
-
-//    public void registerNewRandomUser() {
-//        String newRandomEmail = System.currentTimeMillis() + "_johndoe@t.test";
-//        new RegistrationPage(app.driver, app.wait).newRandomUser(newRandomEmail);
-//        new ProfilePage(app.driver, app.wait).updateUser("name","voreName","Telephone");
-//        new ProfilePage(app.driver, app.wait).verifyUpdateResult("name","voreName","Telephone");
-//
-
+}
 

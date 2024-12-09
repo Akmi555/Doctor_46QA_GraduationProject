@@ -4,13 +4,12 @@ import com.doctor.core.TestBase;
 import com.doctor.pages.HomePage;
 import com.doctor.pages.LoginPage;
 import com.doctor.pages.TerminVereibarenPage;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
+
 
 
 public class TerminVereibarenTests extends TestBase {
@@ -26,7 +25,8 @@ public class TerminVereibarenTests extends TestBase {
         new HomePage(app.driver, app.wait)
                 .clickOnLoginLink();
         new LoginPage(app.driver, app.wait)
-                .enterPersonalData("alice.smith@t.test", "SecurePass1")
+                .enterPersonalData("smith@1t.test", "Qwery123")
+//                .enterPersonalData("alice.smith@t.test", "SecurePass1")
                 .clickOnAnmeldenLink();
         Assert.assertTrue(homePage.isAccountButtonPresent(), "Пользователь не залогинен!");
     }
@@ -39,10 +39,10 @@ public class TerminVereibarenTests extends TestBase {
                 .selectTherapyMenu()
                 // Шаг 3: Выбрать Infusionstherapie
                 .selectTherapyById("1") // ID для Infusionstherapie
-                // Шаг 4: Нажать на дату 11.12.2024
-                .selectDateByTarget("#aTimeslot3")
-                // Шаг 5: Выбрать таймслот 11:00
-                .selectTimeslotById("3at0")
+                // Шаг 4: Нажать на дату 13.12.2024
+                .selectDateByTarget("#aTimeslot7")
+                // Шаг 5: Выбрать таймслот 12:00
+                .selectTimeslotById("7at0")
                 // Шаг 6: Прокрутить вниз и нажать Termin vereinbaren
                 .scrollToBottomAndConfirmTermin();
         // Шаг 7: Проверить успешность бронирования
@@ -51,18 +51,19 @@ public class TerminVereibarenTests extends TestBase {
     }
 
     @AfterMethod
-    public void postCondition() {
+    public void  postCondition() {
         // Шаг 1: Закрыть всплывающее сообщение об успешной регистрации
         terminVereibarenPage
                 .closeSuccessNotification();
-        // Шаг 2: Нажать на кнопку аккаунта
+//         Шаг 2: Нажать на кнопку аккаунта
         homePage
                 .clickAccountButton();
         // Шаг 3: Нажать на термин в меню аккаунта
         terminVereibarenPage
                 .selectTerminFromAccountMenu()
                 // Шаг 4: Удалить термин
-                .deleteFirstTermin();
+                .deleteFirstTermin()
+                .clickConfirmDeleteButton();
         // Шаг 5: Проверить успешное удаление
         Assert.assertTrue(terminVereibarenPage.isDeleteSuccessNotificationDisplayed(),
                 "Уведомление об успешном удалении не отображается!");
@@ -111,9 +112,6 @@ public class TerminVereibarenTests extends TestBase {
 //            }
 //        }
 //    }
-
-
-
 
 
 //    public void itera() {

@@ -125,7 +125,7 @@ public class HomePage extends BasePage {
         click(logoutButton);
         return new HomePage(driver, wait);
     }
-    @FindBy(xpath = "//button[text()='Account']")
+    @FindBy(xpath = "//a[contains(text(),'Account')]")
     WebElement accountButton;
 
     public LoginPage clickAccountButton() {
@@ -136,7 +136,10 @@ public class HomePage extends BasePage {
         return isElementPresent(accountButton);
     }
 
+    public void getHomePage() {
+        driver.get("https://gesundheitspraxis-wertvoll.de");
     }
+}
 
 
 

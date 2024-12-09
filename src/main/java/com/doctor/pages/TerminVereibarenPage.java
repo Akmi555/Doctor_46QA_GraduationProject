@@ -44,11 +44,14 @@ public class TerminVereibarenPage extends BasePage {
     @FindBy(xpath = "//a[contains(text(),'Termine')]")
     WebElement accountTerminMenu;
 
-    @FindBy(xpath = "//button[contains(@class,'btn btn-danger')]")
+    @FindBy(xpath = "(//div[@class='col-sm-1']//button)[1]")
     public WebElement deleteTerminButton;
 
     @FindBy(xpath = "//div[contains(text(),'Ihr Termin wurde erfolgreich abgesagt. Sie erhalte')]")
     WebElement deleteSuccessNotification;
+
+    @FindBy(xpath = "//button[contains(text(),'Ja, löschen!')]")
+    WebElement confirmDeleteButton;
 
     // Методы
     public TerminVereibarenPage clickTerminVereibarenButton() {
@@ -103,9 +106,9 @@ public class TerminVereibarenPage extends BasePage {
     }
 
     public TerminVereibarenPage deleteFirstTermin() {
-        WebElement deleteButton = driver.findElement(By.xpath("//body/div[@id='root']/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[5]/div[1]/div[1]/div[5]/button[1]"));
-        wait.until(ExpectedConditions.visibilityOf(deleteButton)); // Ожидание видимости кнопки
-        clickElementWithJs(deleteButton);
+
+        wait.until(ExpectedConditions.visibilityOf(deleteTerminButton)); // Ожидание видимости кнопки
+        clickElementWithJs(deleteTerminButton);
 
         return this;
     }
@@ -113,6 +116,10 @@ public class TerminVereibarenPage extends BasePage {
 
     public boolean isDeleteSuccessNotificationDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(deleteSuccessNotification)).isDisplayed();
+    }
+
+    public void clickConfirmDeleteButton() {
+        click(confirmDeleteButton);
     }
 }
 //    @FindBy(xpath = "//input[@id='isNew']")

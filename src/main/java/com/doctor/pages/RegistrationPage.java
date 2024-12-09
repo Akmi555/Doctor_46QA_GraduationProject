@@ -19,6 +19,7 @@ public class RegistrationPage extends BasePage {
         super(driver, wait);
         PageFactory.initElements(driver, this);
     }
+
     @BeforeMethod
     public static RegistrationPage navigateToRegistrationPage(WebDriver driver, WebDriverWait wait) {
         // Инициализируем HomePage
@@ -30,50 +31,54 @@ public class RegistrationPage extends BasePage {
         // Переход на RegistrationPage через LoginPage
         return loginPage.navigateToRegistrationPage();
     }
+
     @FindBy(xpath = "//a[contains(text(),'Konto erstellen')]")
     WebElement kontoErstellen;
 
     public RegistrationPage clickKontoErstellenButton() {
         click(kontoErstellen);
-        return new RegistrationPage(driver,wait);
+        return new RegistrationPage(driver, wait);
     }
 
     @FindBy(xpath = "//h1[contains(text(),'Konto erstellen')]")
     WebElement kontoErstellenPageTitle;
+
     public boolean isKontoErstellenPageTitlePresent() {
         return isElementPresent(kontoErstellenPageTitle);
     }
 
-    @FindBy(xpath = "(//div[contains(@class,'col-sm-6 mb-3')]//input)[1]")
+    @FindBy(xpath = "(//input[@placeholder='Vorname'])")
     WebElement vorname;
 
-    @FindBy(xpath = "(//div[@class='col-sm-6']//input)[1]")
+    @FindBy(xpath = "(//input[@placeholder='Nachname'])")
     WebElement nachname;
 
-    @FindBy(xpath = "(//div[contains(@class,'col-sm-6 mb-3')]//input)[2]")
+    @FindBy(xpath = "(//input[@placeholder='Email'])")
     WebElement email;
 
-    @FindBy(xpath = "(//div[@class='col-sm-6']//input)[2]")
+    @FindBy(xpath = "(//input[@placeholder='Telefonnummer (optional)'])")
     WebElement telefonnummer;
 
-    @FindBy(xpath = "//div[@class='form-group']//input[1]")
+    @FindBy(xpath = "//input[@placeholder='Passwort']")
     WebElement password;
 
     public RegistrationPage enterPatienDetails(String vorName, String nachName, String Email, String telefonNumber, String passWord) {
-        type(vorname,vorName);
-        type(nachname,nachName);
-        type(email,Email);
+        type(vorname, vorName);
+        type(nachname, nachName);
+        type(email, Email);
         type(telefonnummer, telefonNumber);
-        type(password,passWord);
+        type(password, passWord);
         return this;
     }
+
     @FindBy(xpath = "//button[contains(text(),'Weiter')]")
     WebElement weiterButton;
 
     public RegistrationPage clickWeiterLink() {
         click(weiterButton);
-        return new RegistrationPage(driver,wait);
+        return new RegistrationPage(driver, wait);
     }
+
     @FindBy(xpath = "//div[contains(text(),\"Username 'alice.smith@t.test' is already taken\")]")
     WebElement userNameAlreadyTakenNotification;
 
@@ -98,6 +103,22 @@ public class RegistrationPage extends BasePage {
         }
     }
 
+    @FindBy(xpath = "//div[contains(@class,'Toastify__toast-icon Toastify--animate-icon')]/following-sibling::div[1]")
+    WebElement errorRegistrationMessage;
+
+    @FindBy(xpath = "//button[@class='Toastify__close-button Toastify__close-button--light']")
+    WebElement closeRegistrationMessageButton;
+
+    public boolean isRegistrationErrorMessagePresent() {
+return isElementPresent(errorRegistrationMessage);
+    }
+
+    public void closeRegistrationErrorMessage() {
+        click(closeRegistrationMessageButton);
+    }
+}
+
+
     /**
      * Проверяет успешное перенаправление на HomePage
      * @return true, если кнопка "Account" отображается
@@ -116,4 +137,4 @@ public class RegistrationPage extends BasePage {
      * @return true, если регистрация прошла успешно; false, если возникла ошибка
      */
 
-}
+

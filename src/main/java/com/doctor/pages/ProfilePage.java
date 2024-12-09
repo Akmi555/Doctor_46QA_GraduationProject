@@ -15,11 +15,11 @@ public class ProfilePage extends BasePage {
     @FindBy(xpath = "//input[@name='FirstName']")
     public WebElement vorname;
 
-    @FindBy(xpath = "(//div[@class='col-sm-6']//input)[2]")
+    @FindBy(xpath = "//input[@placeholder='Nachname']")
     public WebElement nachname;
 
 
-    @FindBy(xpath = "(//div[@class='col-sm-6']//input)[1]")
+    @FindBy(xpath = "//input[@placeholder='Telefonnummer']")
     WebElement telefonnummer;
 
 
