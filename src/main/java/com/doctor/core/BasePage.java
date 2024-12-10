@@ -49,11 +49,18 @@ public class BasePage {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2)); // неявное
     }
-
     public void click(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-        // element.click();
-        logger.info("[" + element + "] is pressed");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 секунд ожидания
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        } catch (TimeoutException e) {
+            throw new RuntimeException("Element is not clickable after 10 seconds.", e);
+        }
+//    public void click(WebElement element) {
+//        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+//        // element.click();
+//        logger.info("[" + element + "] is pressed");
+//    }
     }
 
     protected void type(WebElement element, String text) {

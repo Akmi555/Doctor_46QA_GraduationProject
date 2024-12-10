@@ -1,5 +1,4 @@
 package com.doctor.tests_selenium;
-
 import com.doctor.model.User;
 import com.doctor.core.TestBase;
 import com.doctor.pages.HomePage;
@@ -71,7 +70,10 @@ public class ProfilePageTests extends TestBase {
 
         // Проверяем сообщение о валидации
         String validationMessage = profilePage.getValidationMessage(profilePage.vorname);
-        Assert.assertEquals(validationMessage, "Заполните это поле.", "Сообщение валидации для Vorname не соответствует ожидаемому!");
+        Assert.assertTrue(
+                validationMessage.matches(".*Заполните это поле.*|.*Please fill out this field.*"),
+                "Сообщение валидации для Vorname не соответствует ожидаемому!"
+        );
         System.out.println("Сообщение валидации для Vorname: " + validationMessage);
     }
 
@@ -85,7 +87,10 @@ public class ProfilePageTests extends TestBase {
 
         // Проверяем сообщение о валидации
         String validationMessage = profilePage.getValidationMessage(profilePage.nachname);
-        Assert.assertEquals(validationMessage, "Заполните это поле.", "Сообщение валидации для Nachname не соответствует ожидаемому!");
+        Assert.assertTrue(
+                validationMessage.matches(".*Заполните это поле.*|.*Please fill out this field.*"),
+                "Сообщение валидации для Vorname не соответствует ожидаемому!"
+        );
         System.out.println("Сообщение валидации для Nachname: " + validationMessage);
     }
 

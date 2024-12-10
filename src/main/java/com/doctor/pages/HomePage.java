@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver, WebDriverWait wait) {
@@ -28,6 +30,8 @@ public class HomePage extends BasePage {
     WebElement loginLink;
 
     public LoginPage getLoginPage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(loginLink));
         click(loginLink);
         return new LoginPage(driver, wait);
     }

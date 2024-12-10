@@ -1,16 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="SmokyTest" verbose="1">
-    <test name="Negative">
+    <test name="Positive">
         <classes>
-            <class name="com.doctor.CreateAccountTests">
+            <class name="com.doctor.tests_selenium.ProfilePageTests">
                 <methods>
-                    <include name=".*Negative.*"/>
-                </methods>
-            </class>
-            <class name="com.doctor.tests_selenium.LoginTests">
-                <methods>
-                    <include name=".*Positive.*"/>
+
                 </methods>
             </class>
         </classes>

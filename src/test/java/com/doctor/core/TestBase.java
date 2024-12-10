@@ -2,8 +2,6 @@ package com.doctor.core;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
@@ -16,6 +14,8 @@ import org.testng.annotations.BeforeSuite;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import static com.doctor.core.BasePage.driver;
 
 public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
@@ -81,6 +81,8 @@ public class TestBase {
 
     @AfterSuite
     public void tearDown() {
+        driver.manage().deleteAllCookies();
+        driver.navigate().refresh();
         logger.info("********************** ALL TEST END *************************");
         app.stop();
     }

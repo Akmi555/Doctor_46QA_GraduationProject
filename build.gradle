@@ -52,9 +52,9 @@ def registerTask(String taskName, String suitePath){
     }
 }
 
+registerTask('smokePositive','src/test/resources/smokePositive.xml')
+registerTask('smokeNegative','src/test/resources/smokeNegative.xml')
 registerTask('smoke','src/test/resources/smoke.xml')
-registerTask('regression','src/test/resources/regression.xml')
-registerTask('accept','src/test/resources/accept.xml')
 registerTask('login','src/test/resources/login.xml')
 
 tasks.register('allure') {
