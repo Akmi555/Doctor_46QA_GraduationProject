@@ -35,7 +35,7 @@ public class ApplicationManager {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("window-size=1920x1080");
             // options.addArguments("headless");
-            WebDriverManager.chromedriver().setup();
+            WebDriverManager.chromedriver().setup();//авоматическ обновляет драйвер
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("firefox")) {
             driver = new FirefoxDriver();

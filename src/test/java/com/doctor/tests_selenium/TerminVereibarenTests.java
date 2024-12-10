@@ -39,10 +39,10 @@ public class TerminVereibarenTests extends TestBase {
                 .selectTherapyMenu()
                 // Шаг 3: Выбрать Infusionstherapie
                 .selectTherapyById("1") // ID для Infusionstherapie
-                // Шаг 4: Нажать на дату 13.12.2024
-                .selectDateByTarget("#aTimeslot7")
-                // Шаг 5: Выбрать таймслот 12:00
-                .selectTimeslotById("7at0")
+                // Шаг 4: Нажать на дату 20.12.2024
+                .selectDateByTarget("#aTimeslot6")
+                // Шаг 5: Выбрать таймслот 16:30
+                .selectTimeslotById("6at5")
                 // Шаг 6: Прокрутить вниз и нажать Termin vereinbaren
                 .scrollToBottomAndConfirmTermin();
         // Шаг 7: Проверить успешность бронирования

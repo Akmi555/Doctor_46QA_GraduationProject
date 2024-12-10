@@ -31,6 +31,7 @@ public class TestBase {
     public void startTest(Method method) {
         logger.info("Test is started: [" + method.getName() + "]");
         Allure.step("Start test: " + method.getName());
+//        app.init();
     }
 
     @AfterMethod
