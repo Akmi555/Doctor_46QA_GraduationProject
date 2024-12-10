@@ -49,8 +49,8 @@ public class BasePage {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2)); // неявное
     }
-    public void click(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 секунд ожидания
+    public static void click(WebElement element) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // 10 секунд ожидания
         try {
             wait.until(ExpectedConditions.elementToBeClickable(element)).click();
         } catch (TimeoutException e) {

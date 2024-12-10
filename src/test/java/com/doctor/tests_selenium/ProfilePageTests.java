@@ -55,7 +55,7 @@ public class ProfilePageTests extends TestBase {
         ProfilePage profilePage = new ProfilePage(app.getDriver(), app.wait);
         User user = new User().setName(newRandomName).setPhone("1234567890");
         profilePage
-                .updateUser(user.getName(), user.getLastName(), user.getPhone())
+                .updateUser(user.getName(), user.getLastName(),user.getPhone())
                 .verifyUpdateResult();
 
         Assert.assertTrue(profilePage.verifyUpdateResult(), "User update should be successful for a randomly generated user");
@@ -95,7 +95,7 @@ public class ProfilePageTests extends TestBase {
     }
 
 
-    @AfterMethod
+    @AfterMethod(enabled = false)
     public void postCondition() {
         try {
             // Проверяем, отображается ли сообщение об успешном обновлении
@@ -115,7 +115,7 @@ public class ProfilePageTests extends TestBase {
             // Проверяем, отображается ли кнопка аккаунта (признак авторизации)
             HomePage homePage = new HomePage(app.driver, app.wait);
             if (homePage.isAccountButtonPresent()) {
-                homePage.clickAccountButton();
+                HomePage.clickAccountButton();
                 homePage.clickLogoutButton();
                 System.out.println("Пользователь разлогинился.");
             } else {
@@ -124,6 +124,7 @@ public class ProfilePageTests extends TestBase {
         } catch (Exception e) {
             System.err.println("Ошибка при разлогинивании: " + e.getMessage());
         }
+
     }
 
 }

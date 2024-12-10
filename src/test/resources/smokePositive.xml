@@ -4,7 +4,7 @@
     <test name="PositiveTests">
         <classes>
             <class name="com.doctor.tests_selenium.HomePageTests"/>
-            <class name="com.doctor.tests_selenium.RegistrationTests">
+             <class name="com.doctor.tests_selenium.RegistrationTests">
                 <methods>
                     <exclude name=".*WithExisting.*"/>
                     <exclude name=".*WithInvalid.*"/>
@@ -12,16 +12,17 @@
             </class>
             <class name="com.doctor.tests_selenium.TerminVereibarenTests"/>
             <class name="com.doctor.tests_selenium.ProfilePageTests">
-                <methods>
-                    <exclude name=".*WithEmpty.*"/>
-                </methods>
-            </class>
-            <class name="com.doctor.tests_selenium.LoginTests">
-                <methods>
-                    <exclude name=".*Invalid.*"/>
-                    <exclude name=".*WithExisting.*"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+
+              <methods>
+                  <exclude name=".*WithEmpty.*"/>
+              </methods>
+          </class>
+          <class name="com.doctor.tests_selenium.LoginTests">
+              <methods>
+                  <exclude name=".*Invalid.*"/>
+                  <exclude name=".*WithExisting.*"/>
+              </methods>
+          </class>
+      </classes>
+  </test>
 </suite>

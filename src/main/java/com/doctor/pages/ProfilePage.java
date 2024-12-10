@@ -1,10 +1,15 @@
 package com.doctor.pages;
+
 import com.doctor.core.BasePage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
 public class ProfilePage extends BasePage {
 
 
@@ -31,9 +36,7 @@ public class ProfilePage extends BasePage {
 
     // Method to update user profile information
     public ProfilePage updateUser(String vorName, String nachName, String telefonNumber) {
-        vorname.clear();
         type(vorname, vorName);
-        nachname.clear();
         type(nachname, nachName);
         type(telefonnummer, telefonNumber);
         click(speichernButton);
@@ -54,8 +57,11 @@ public class ProfilePage extends BasePage {
     public void clickCloseupdateSuccessMessageButton() {
         click(closeUpdateSuccessMessageButton);
     }
+
     // Method to get validation message for a field using JavaScriptExecutor
     public String getValidationMessage(WebElement field) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        wait.until(ExpectedConditions.visibilityOf(field));
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         return (String) jsExecutor.executeScript("return arguments[0].validationMessage;", field);
     }

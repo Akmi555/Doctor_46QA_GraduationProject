@@ -24,14 +24,14 @@ public class TestBase {
     @BeforeSuite
     public void setUp() {
         logger.info("********************** TESTING IN PROGRESS *************************");
-        app.init();
+//        app.init();
     }
 
     @BeforeMethod
     public void startTest(Method method) {
         logger.info("Test is started: [" + method.getName() + "]");
         Allure.step("Start test: " + method.getName());
-//        app.init();
+        app.init();
     }
 
     @AfterMethod
@@ -41,6 +41,7 @@ public class TestBase {
             if (!key.equals("ALLURE_UUID")) { // Исключаем служебные параметры
                 Object value = context.getAttribute(key);
                 parameters.append(key).append("=").append(value).append(", ");
+
             }
         }
 
@@ -68,6 +69,7 @@ public class TestBase {
         }
 
         logger.info("Test is ended: [" + method.getName() + "]");
+        app.stop();
     }
 
     @Attachment(value = "Screenshot", type = "image/png")
@@ -82,9 +84,7 @@ public class TestBase {
 
     @AfterSuite
     public void tearDown() {
-        driver.manage().deleteAllCookies();
-        driver.navigate().refresh();
         logger.info("********************** ALL TEST END *************************");
-        app.stop();
+
     }
 }

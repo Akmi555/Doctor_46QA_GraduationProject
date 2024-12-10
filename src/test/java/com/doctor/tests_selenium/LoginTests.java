@@ -47,7 +47,7 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(new LoginPage(app.driver, app.wait).isFalscheDatenNotificationPresent(), "User is logged in");
     }
 
-    @AfterMethod
+    @AfterMethod(enabled = false)
     public void postCondition() {
         // Проверяем, находится ли пользователь на домашней странице
         HomePage homePage = new HomePage(app.driver, app.wait);
@@ -64,7 +64,7 @@ public class LoginTests extends TestBase {
             new HomePage(app.driver, app.wait).getHomePage();
         } else {
             // Возможно, тест не завершился логином, но мы убедимся, что мы возвращаемся на домашнюю
-            homePage.getHomePage();
+
         }
     }
 }

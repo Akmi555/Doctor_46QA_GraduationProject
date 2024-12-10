@@ -130,9 +130,9 @@ public class HomePage extends BasePage {
         return new HomePage(driver, wait);
     }
     @FindBy(xpath = "//a[contains(text(),'Account')]")
-    WebElement accountButton;
+    static WebElement accountButton;
 
-    public LoginPage clickAccountButton() {
+    public static LoginPage clickAccountButton() {
         click(accountButton);
         return new LoginPage(driver, wait);
     }

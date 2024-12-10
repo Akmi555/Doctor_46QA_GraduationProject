@@ -105,11 +105,27 @@ public class TerminVereibarenPage extends BasePage {
         return this;
     }
 
-    public TerminVereibarenPage deleteFirstTermin() {
+    public TerminVereibarenPage deleteFirstTermin(){
+        try {
+            // Ожидание и проверка наличия кнопки удаления
+            wait.until(ExpectedConditions.visibilityOf(deleteTerminButton));
+            clickElementWithJs(deleteTerminButton);
+        } catch (Exception e) {
+            // Если кнопка удаления не найдена, нажимаем на Mehr
+            WebElement mehrButton = driver.findElement(By.xpath("//button[contains(text(),'Mehr')]"));
+            if (mehrButton.isDisplayed()) {
+                clickElementWithJs(mehrButton);
+                System.out.println("Mehr button present and pressed");
 
-        wait.until(ExpectedConditions.visibilityOf(deleteTerminButton)); // Ожидание видимости кнопки
-        clickElementWithJs(deleteTerminButton);
-
+                // Повторный поиск и нажатие кнопки удаления
+                WebElement updatedDeleteButton = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='col-sm-1']//button)[1]"))
+                );
+                clickElementWithJs(updatedDeleteButton);
+            } else {
+                throw new RuntimeException("Кнопка удаления термина или кнопка Mehr не найдены!");
+            }
+        }
         return this;
     }
 

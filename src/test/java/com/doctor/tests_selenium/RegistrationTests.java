@@ -87,7 +87,7 @@ public class RegistrationTests extends TestBase {
         System.out.println("Сообщение валидации: " + validationMessage);
     }
 
-    @AfterMethod
+    @AfterMethod(enabled = false)
     public void postCondition() {
         try {
             HomePage homePage = new HomePage(app.driver, app.wait);
@@ -113,7 +113,9 @@ public class RegistrationTests extends TestBase {
             }
         } catch (Exception e) {
             System.err.println("Ошибка в @AfterMethod: " + e.getMessage());
+
         }
+        HomePage.clickAccountButton();
     }
 }
 
