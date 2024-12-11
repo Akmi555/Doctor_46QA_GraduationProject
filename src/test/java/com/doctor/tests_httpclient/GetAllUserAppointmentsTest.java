@@ -10,7 +10,7 @@ import static org.testng.Assert.*;
 public class GetAllUserAppointmentsTest extends TestBaseAPI {
 
     @Test
-    public void getAllAppointmentsTest() {
+    public void getAllUserAppointmentsTest() {
         // Указываем номер страницы для тестирования
         int pageNumber = 1;
 
@@ -41,7 +41,7 @@ public class GetAllUserAppointmentsTest extends TestBaseAPI {
     }
 
     @Test
-    public void getEmptyAppointmentsTest() {
+    public void getEmptyUserAppointmentsTest() {
         // Указываем номер страницы, которая, скорее всего, будет пустой
         int emptyPageNumber = 999;
 
