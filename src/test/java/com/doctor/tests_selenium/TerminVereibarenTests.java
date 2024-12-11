@@ -42,7 +42,7 @@ public class TerminVereibarenTests extends TestBase {
                 // Шаг 4: Нажать на дату 20.12.2024
                 .selectDateByTarget("#aTimeslot6")
                 // Шаг 5: Выбрать таймслот 16:30
-                .selectTimeslotById("6at5")
+                .selectTimeslotById("6at4")
                 // Шаг 6: Прокрутить вниз и нажать Termin vereinbaren
                 .scrollToBottomAndConfirmTermin();
         // Шаг 7: Проверить успешность бронирования
@@ -56,7 +56,7 @@ public class TerminVereibarenTests extends TestBase {
         terminVereibarenPage
                 .closeSuccessNotification();
 //         Шаг 2: Нажать на кнопку аккаунта
-        homePage
+        HomePage
                 .clickAccountButton();
         // Шаг 3: Нажать на термин в меню аккаунта
         terminVereibarenPage
