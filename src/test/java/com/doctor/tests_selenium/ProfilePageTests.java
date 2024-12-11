@@ -1,6 +1,6 @@
 package com.doctor.tests_selenium;
 import com.doctor.model.User;
-import com.doctor.core.TestBase;
+import com.doctor.core.TestBaseUI;
 import com.doctor.pages.HomePage;
 import com.doctor.pages.LoginPage;
 import com.doctor.pages.ProfilePage;
@@ -9,7 +9,7 @@ import org.testng.Assert;
 
 import org.testng.annotations.*;
 
-public class ProfilePageTests extends TestBase {
+public class ProfilePageTests extends TestBaseUI {
     @BeforeMethod
     public void preCondition() {
         new HomePage(app.driver, app.wait).getLoginPage();

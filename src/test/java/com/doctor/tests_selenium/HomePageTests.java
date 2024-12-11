@@ -1,12 +1,12 @@
 package com.doctor.tests_selenium;
 
-import com.doctor.core.TestBase;
+import com.doctor.core.TestBaseUI;
 import com.doctor.pages.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class HomePageTests extends TestBase {
+public class HomePageTests extends TestBaseUI {
 
     @BeforeMethod
     public void preCondition() {

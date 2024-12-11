@@ -32,7 +32,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
-    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
+    implementation 'org.apache.httpcomponents:tests_httpclient:4.5.14'
     //Для работы с REST API
     implementation group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.14'
     //Парсит JSON  в Java обьекты и обратно

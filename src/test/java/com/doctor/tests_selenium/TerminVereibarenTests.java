@@ -1,6 +1,6 @@
 package com.doctor.tests_selenium;
 
-import com.doctor.core.TestBase;
+import com.doctor.core.TestBaseUI;
 import com.doctor.pages.HomePage;
 import com.doctor.pages.LoginPage;
 import com.doctor.pages.TerminVereibarenPage;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 
 
-public class TerminVereibarenTests extends TestBase {
+public class TerminVereibarenTests extends TestBaseUI {
     private HomePage homePage;
     private TerminVereibarenPage terminVereibarenPage;
 

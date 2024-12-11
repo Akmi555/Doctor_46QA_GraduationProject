@@ -1,5 +1,5 @@
 package com.doctor.tests_selenium;
-import com.doctor.core.TestBase;
+import com.doctor.core.TestBaseUI;
 import com.doctor.pages.HomePage;
 import com.doctor.pages.LoginPage;
 import org.testng.Assert;
@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 
-public class LoginTests extends TestBase {
+public class LoginTests extends TestBaseUI {
     String newRandomEmail = System.currentTimeMillis() + "test@t.test";
 
     @BeforeMethod

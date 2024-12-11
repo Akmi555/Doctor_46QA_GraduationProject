@@ -1,5 +1,5 @@
 package com.doctor.tests_selenium;
-import com.doctor.core.TestBase;
+import com.doctor.core.TestBaseUI;
 import com.doctor.model.User;
 import com.doctor.pages.HomePage;
 import com.doctor.pages.LoginPage;
@@ -13,7 +13,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class RegistrationTests extends TestBase {
+public class RegistrationTests extends TestBaseUI {
     @BeforeMethod
     public void preCondition() {
         new HomePage(app.driver, app.wait).getLoginPage().isAnmeldenButtonIsPresent();

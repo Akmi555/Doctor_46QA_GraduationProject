@@ -15,10 +15,8 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static com.doctor.core.BasePage.driver;
-
-public class TestBase {
-    Logger logger = LoggerFactory.getLogger(TestBase.class);
+public class TestBaseUI {
+    Logger logger = LoggerFactory.getLogger(TestBaseUI.class);
     public static ApplicationManager app = new ApplicationManager(System.getProperty("browser", "chrome"));
 
     @BeforeSuite
