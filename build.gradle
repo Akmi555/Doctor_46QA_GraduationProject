@@ -65,7 +65,7 @@ def registerTask(String taskName, String suitePath){
 registerTask('smokePositive','src/test/resources/smokePositive.xml')
 registerTask('smokeNegative','src/test/resources/smokeNegative.xml')
 registerTask('rest_assured','src/test/resources/rest_assured.xml')
-registerTask('smoke','src/test/resources/smoke.xml')
+registerTask('seleniumTests','src/test/resources/seleniumTests.xml')
 registerTask('login','src/test/resources/login.xml')
 
 tasks.register('allure') {
