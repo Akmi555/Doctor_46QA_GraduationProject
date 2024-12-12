@@ -105,25 +105,44 @@ public class TerminVereibarenPage extends BasePage {
         return this;
     }
 
-    public TerminVereibarenPage deleteFirstTermin(){
+    public TerminVereibarenPage deleteFirstTermin() {
         try {
-            // Ожидание и проверка наличия кнопки удаления
-            wait.until(ExpectedConditions.visibilityOf(deleteTerminButton));
-            clickElementWithJs(deleteTerminButton);
-        } catch (Exception e) {
-            // Если кнопка удаления не найдена, нажимаем на Mehr
-            WebElement mehrButton = driver.findElement(By.xpath("//button[contains(text(),'Mehr')]"));
-            if (mehrButton.isDisplayed()) {
-                clickElementWithJs(mehrButton);
-                System.out.println("Mehr button present and pressed");
+            // Ожидаем появления кнопки удаления
+            WebElement deleteButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='col-sm-1']//button)[1]")));
 
-                // Повторный поиск и нажатие кнопки удаления
-                WebElement updatedDeleteButton = wait.until(
-                        ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='col-sm-1']//button)[1]"))
-                );
-                clickElementWithJs(updatedDeleteButton);
-            } else {
-                throw new RuntimeException("Кнопка удаления термина или кнопка Mehr не найдены!");
+            // Если кнопка удаления уже видна, кликаем по ней
+            clickElementWithJs(deleteButton);
+        } catch (Exception e) {
+            // Если кнопка удаления не была найдена, пытаемся нажать на Mehr до тех пор, пока кнопка удаления не станет видимой
+            boolean mehrButtonVisible = true;
+
+            while (mehrButtonVisible) {
+                try {
+                    // Ищем кнопку Mehr
+                    WebElement mehrButton = driver.findElement(By.xpath("//button[contains(text(),'Mehr')]"));
+
+                    // Если кнопка Mehr доступна, кликаем по ней
+                    if (mehrButton.isDisplayed()) {
+                        clickElementWithJs(mehrButton);
+                        System.out.println("Mehr button pressed");
+                    }
+
+                    // Ожидаем появления кнопки удаления
+                    deleteTerminButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='col-sm-1']//button)[1]")));
+
+                    // Если кнопка удаления появилась, кликаем по ней
+                    clickElementWithJs(deleteTerminButton);
+                    mehrButtonVisible = false; // Прерываем цикл, так как кнопка удаления найдена
+                } catch (Exception ex) {
+                    // Если кнопка Mehr не найдена или кнопка удаления не появилась, пробуем снова
+                    System.out.println("Кнопка Mehr не найдена или кнопка удаления не видна. Попробуем снова.");
+                    // Добавляем небольшую задержку перед следующей попыткой, чтобы не перегружать сервер
+                    try {
+                        Thread.sleep(500); // Пауза в 500 мс
+                    } catch (InterruptedException interruptedException) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
             }
         }
         return this;

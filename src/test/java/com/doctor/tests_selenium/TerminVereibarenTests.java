@@ -1,5 +1,4 @@
 package com.doctor.tests_selenium;
-
 import com.doctor.core.TestBaseUI;
 import com.doctor.pages.HomePage;
 import com.doctor.pages.LoginPage;

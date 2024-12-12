@@ -1,6 +1,8 @@
 package com.doctor.pages;
 
 import com.doctor.core.BasePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,11 +32,23 @@ public class HomePage extends BasePage {
     WebElement loginLink;
 
     public LoginPage getLoginPage() {
+        // Создаем WebDriverWait с максимальным временем ожидания 20 секунд
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(loginLink));
-        click(loginLink);
+
+        // Ожидаем завершения загрузки страницы с помощью JavaScript
+        wait.until(ExpectedConditions.jsReturnsValue("return document.readyState == 'complete';"));
+
+        // Ожидаем, что кнопка "Login" станет кликабельной
+        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Login')]")));
+
+        // Кликаем по кнопке с использованием JavaScript
+        clickElementWithJs(loginButton);
+
+        // Возвращаем новую страницу логина
         return new LoginPage(driver, wait);
     }
+
+
 
     //    public boolean isTeamButtonPresent() {
 //        return teamButton.isDisplayed();

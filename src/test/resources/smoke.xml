@@ -3,9 +3,12 @@
 <suite name="SmokyTest" verbose="1">
     <test name="Positive">
         <classes>
-            <class name="com.doctor.tests_selenium.TerminVereibarenTests">
+            <class name="com.doctor.tests_selenium.LoginTests"/>
+            <class name="com.doctor.tests_selenium.RegistrationTests">
                 <methods>
-
+                    <exclude name=".*Invalid.*"/>
+                    <exclude name=".*WithExisting.*"/>
+                    <exclude name=".*WithEmpty.*"/>
                 </methods>
             </class>
         </classes>
