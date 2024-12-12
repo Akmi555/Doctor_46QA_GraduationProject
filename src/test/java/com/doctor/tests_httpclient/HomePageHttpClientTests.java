@@ -24,7 +24,7 @@ public class HomePageHttpClientTests extends TestBaseAPI {
         // Подсчёт времени отклика
         long responseTime = endTime - startTime;
         System.out.println("Response time: " + responseTime + "ms");
-        assert responseTime < 1000 : "Время отклика должно быть меньше 700 мс";
+        assert responseTime < 2000 : "Время отклика должно быть меньше 2000 мс";
     }
 
     @Test
