@@ -22,7 +22,6 @@ dependencies {
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.9'
     testImplementation 'io.qameta.allure:allure-testng:2.22.0'
     implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.0'//для api тестов
-    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.0'
     implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.18.1'
     implementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.18.1'
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.9.2'
@@ -32,7 +31,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
-    implementation 'org.apache.httpcomponents:tests_httpclient:4.5.14'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
     //Для работы с REST API
     implementation group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.14'
     //Парсит JSON  в Java обьекты и обратно
@@ -65,6 +64,7 @@ def registerTask(String taskName, String suitePath){
 
 registerTask('smokePositive','src/test/resources/smokePositive.xml')
 registerTask('smokeNegative','src/test/resources/smokeNegative.xml')
+registerTask('rest_assured','src/test/resources/rest_assured.xml')
 registerTask('smoke','src/test/resources/smoke.xml')
 registerTask('login','src/test/resources/login.xml')
 

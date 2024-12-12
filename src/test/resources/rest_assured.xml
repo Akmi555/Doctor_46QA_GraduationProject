@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="RestAssured" verbose="1">
+    <test name="PositiveTests">
+        <classes>
+            <class name="com.doctor.tests_httpclient.LoginHttpClientTests"/>
+            <class name="com.doctor.tests_httpclient.RegistrationHttpClientTests"/>
+            <class name="com.doctor.tests_httpclient.UserProfileUpdateHttpClientTests"/>
+            <class name="com.doctor.tests_httpclient.HomePageHttpClientTests"/>
+            <class name="com.doctor.tests_httpclient.GetAllExistedServicesTest"/>
+            <class name="com.doctor.tests_httpclient.GetAllUserAppointmentsTest"/>
+            <class name="com.doctor.tests_httpclient.BookAndDeleteAppointmentTest"/>
+        </classes>
+    </test>
+
+    <test name="NegativeTests">
+        <classes>
+            <class name="com.doctor.tests_httpclient.DeleteAlreadyDeletedAppointmentTest">
+                <methods>
+                    <include name=".*AlreadyDeleted.*"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

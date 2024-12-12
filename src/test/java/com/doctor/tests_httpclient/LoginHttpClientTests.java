@@ -1,10 +1,7 @@
 package com.doctor.tests_httpclient;
-
 import com.doctor.core.TestBaseAPI;
 import org.testng.annotations.Test;
-
 import static io.restassured.RestAssured.given;
-
 public class LoginHttpClientTests extends TestBaseAPI {
 
     @Test
